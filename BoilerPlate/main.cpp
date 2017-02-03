@@ -9,9 +9,14 @@
 
 // 
 #include "App.hpp"
+#include "DirectoryUtils.h"
+#include "IOUtils.h"
+#include "fstream"
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
+
+
 
 int main(int argc, char* argv[])
 {
@@ -22,6 +27,27 @@ int main(int argc, char* argv[])
 	assert(_CrtCheckMemory());
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
+
+	string local_dir = DirectoryUtils::GetExeFileName();
+	string file = "Models";
+	string file_path = local_dir + "\\" + file;
+	
+	DirectoryUtils* dirObject = new DirectoryUtils(file_path);
+	vector<string> directoryList = dirObject->GetDir();
+	
+	string newPath = "";
+	for each (string dirItem in directoryList)
+	{
+		std::cout <<"***"<<dirItem <<"***"<< endl;
+		newPath = file_path + "\\" + dirItem;
+		vector<string> contentFile = IOUtils::GetConentFile(newPath);
+		for each (string item in contentFile)
+		{
+			std::cout << item << endl;
+		}
+	}
+	
+
 
 	// Create Game Object
 	//
