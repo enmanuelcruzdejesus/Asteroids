@@ -7,21 +7,57 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="DirectoryUtils.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>Engine\Source files\FileSystem</Filter>
     </ClCompile>
     <ClCompile Include="IOUtils.cpp">
-      <Filter>Engine\Source files</Filter>
+      <Filter>Engine\Source files\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2D.cpp">
+      <Filter>Engine\Source files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawable2D.cpp">
+      <Filter>Engine\Source files\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>Engine\Source files\Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="AppConfig.cpp">
+      <Filter>Game\Source Files\Utilities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="TimeManager.hpp" />
+    <ClInclude Include="Vector2D.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable2D.h">
+      <Filter>Engine\Header files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>Engine\Header files\Helpers</Filter>
+    </ClInclude>
     <ClInclude Include="DirectoryUtils.h">
-      <Filter>Engine\Header files</Filter>
+      <Filter>Engine\Header files\FileSystem</Filter>
     </ClInclude>
     <ClInclude Include="IOUtils.h">
-      <Filter>Engine\Header files</Filter>
+      <Filter>Engine\Header files\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AppConfig.h">
+      <Filter>Game\Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +69,51 @@
     </Filter>
     <Filter Include="Engine\Header files">
       <UniqueIdentifier>{da8cc683-e66e-46b9-be58-7d0e16e23f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\FileSystem">
+      <UniqueIdentifier>{3a7c6588-406a-4679-8474-0046d24d4034}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Math">
+      <UniqueIdentifier>{5cdfae77-4d25-49cc-a505-1433b98ccb33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Graphics">
+      <UniqueIdentifier>{efc65723-429d-4284-b1a9-c6fa4ee3bb24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Helpers">
+      <UniqueIdentifier>{431839d6-2440-4912-9e8c-3d957b90a9df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\FileSystem">
+      <UniqueIdentifier>{05d8bde4-29fa-4ebe-b41a-a343affcb9b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Math">
+      <UniqueIdentifier>{320f80e1-b3a3-4397-b3b1-d956f2ef2109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Graphics">
+      <UniqueIdentifier>{39e5600a-ae73-4801-b2ec-4128951be450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Helpers">
+      <UniqueIdentifier>{51078e39-f4b6-4e63-b504-9e99aa4db01d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2666783a-f8ef-409c-9957-b589c3e77571}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files">
+      <UniqueIdentifier>{6104ec06-8fc1-4a21-a8eb-4be15d16f0ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files">
+      <UniqueIdentifier>{11139cfa-b353-4a4d-951b-aca045be4695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Utilities">
+      <UniqueIdentifier>{c18a1765-d471-4fce-b0f3-a117dfbf28cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Entities">
+      <UniqueIdentifier>{ffbcff9b-a7ba-4c79-950d-8bca66bc7360}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Entities">
+      <UniqueIdentifier>{8fdb0047-48da-431c-99ea-6f1d4499bc5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Utilities">
+      <UniqueIdentifier>{a5a88c92-3fe2-461d-850d-20f3e8603faf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

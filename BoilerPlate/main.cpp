@@ -13,6 +13,7 @@
 #include "IOUtils.h"
 #include "fstream"
 
+
 const int WIDTH = 1136;
 const int HEIGHT = 640;
 
@@ -28,11 +29,11 @@ int main(int argc, char* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	string local_dir = DirectoryUtils::GetExeFileName();
+	string local_dir = Engine::FileSystem::DirectoryUtils::GetExeFileName();
 	string file = "Models";
 	string file_path = local_dir + "\\" + file;
 	
-	DirectoryUtils* dirObject = new DirectoryUtils(file_path);
+	Engine::FileSystem::DirectoryUtils* dirObject = new Engine::FileSystem::DirectoryUtils(file_path);
 	vector<string> directoryList = dirObject->GetDir();
 	
 	string newPath = "";
@@ -40,7 +41,7 @@ int main(int argc, char* argv[])
 	{
 		std::cout <<"***"<<dirItem <<"***"<< endl;
 		newPath = file_path + "\\" + dirItem;
-		vector<string> contentFile = IOUtils::GetConentFile(newPath);
+		vector<string> contentFile = Engine::FileSystem::IOUtils::GetConentFile(newPath);
 		for each (string item in contentFile)
 		{
 			std::cout << item << endl;

@@ -1,18 +1,27 @@
 #include "IOUtils.h"
 #include "vector"
 
-vector<string> IOUtils::GetConentFile(string path)
+namespace Engine
 {
-	vector<string>result;
-	fstream txtfile(path);
-	string value;
-	if (!txtfile.fail())
+	namespace FileSystem 
 	{
-		while (!txtfile.eof())
+
+		vector<string> IOUtils::GetConentFile(string path)
 		{
-			txtfile >> value;
-			result.push_back(value);
+			vector<string>result;
+			fstream txtfile(path);
+			string value;
+			if (!txtfile.fail())
+			{
+				while (!txtfile.eof())
+				{
+					txtfile >> value;
+					result.push_back(value);
+				}
+			}
+			return result;
 		}
+
 	}
-	return result;
 }
+

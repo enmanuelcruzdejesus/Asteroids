@@ -5,7 +5,15 @@
 #include "vector"
 using namespace std;
 
-class IOUtils {
-public:
-	static vector<string>GetConentFile(string path);
-};
+namespace Engine 
+{
+	namespace FileSystem 
+	{
+		class IOUtils {
+		public:
+			static vector<string>GetConentFile(string path);
+		};
+	}
+}
+
+
