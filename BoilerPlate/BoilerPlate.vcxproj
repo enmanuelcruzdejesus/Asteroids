@@ -109,12 +109,12 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ecruz\Source\Repos\Asteroids2\Externals\SDL2-2.0.4\include\SDL2;C:\Users\ecruz\Source\Repos\Asteroids2\Externals\glew-1.13.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\20155973\Source\Repos\Asteroids\Externals\SDL2-2.0.4\include\SDL2;C:\Users\20155973\Source\Repos\Asteroids\Externals\glew-1.13.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\ecruz\Source\Repos\Asteroids2\Externals\SDL2-2.0.4\lib\x64;C:\Users\ecruz\Source\Repos\Asteroids2\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\20155973\Source\Repos\Asteroids\Externals\SDL2-2.0.4\lib\x64;C:\Users\20155973\Source\Repos\Asteroids\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
@@ -181,17 +181,20 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="IOUtils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="RigitBodyComponent.cpp" />
     <ClCompile Include="SDLEvent.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="StringHelper.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TransportationComponent.cpp" />
     <ClCompile Include="Vector2D.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="AppConfig.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="OpenglGameObject.h" />
     <ClInclude Include="DirectoryUtils.h" />
     <ClInclude Include="Drawable2D.h" />
@@ -200,10 +203,12 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="IOUtils.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="RigidBodyComponent.h" />
     <ClInclude Include="SDLEvent.hpp" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="StringHelper.h" />
     <ClInclude Include="TimeManager.hpp" />
+    <ClInclude Include="TransformationComponent.h" />
     <ClInclude Include="Vector2D.h" />
     <ClInclude Include="Vector3D.h" />
   </ItemGroup>

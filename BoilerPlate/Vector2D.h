@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef _VECTOR2_H_
-#define _VECTOR2_H_
+#ifndef _VECTOR2D_H_
+#define _VECTOR2D_H_
 
 namespace Engine
 {
@@ -10,41 +10,49 @@ namespace Engine
 		class Vector2D
 		{
 		public:
-			/*
-			* CONST
-			*/
+			/* =============================================================
+			* STATIC
+			* ============================================================= */
+			static Vector2D Origin;
+
+			/* =============================================================
+			* CTOR
+			* ============================================================= */
 			Vector2D();
+			Vector2D(float uniform);
 			Vector2D(float x, float y);
 
-			/*
+			/* =============================================================
 			* PUBLIC FUNCTIONS
-			*/
-			float Length();
-		    float GetX();
-		    float GetY();
+			* ============================================================= */
+			float Length() const;
+			float SquaredLength() const;
+			float Vector2D::Normalize();
 
-			/*
+			/* =============================================================
 			* OPERATORS
-			*/
-			Vector2D& operator=(const Vector2D& rigth);
-			Vector2D& operator+=(const Vector2D& rigth);
-			Vector2D& operator-=(const Vector2D& rigth);
-			Vector2D& operator*=(const Vector2D& rigth);
-			Vector2D& operator/=(const Vector2D& rigth);
-			Vector2D operator+(const Vector2D& rigth);
-			Vector2D operator-(const Vector2D& rigth);
-			Vector2D operator-();			   
-			Vector2D operator*(const Vector2D& rigth);
-			Vector2D operator/(const Vector2D& rigth);
-			bool operator==(const Vector2D& rigth);
-			bool operator!=(const Vector2D& rigth);
-			friend Vector2D operator*(float scaleUnit, const Vector2D& rigth);
-			friend Vector2D operator*(const Vector2D& left, float scaleUnit);
+			* ============================================================= */
+			Vector2D& operator=(const Vector2D& rhs);
+			Vector2D& operator+=(const Vector2D& rhs);
+			Vector2D& operator-=(const Vector2D& rhs);
+			Vector2D& operator*=(const Vector2D& rhs);
+			Vector2D& operator/=(const Vector2D& rhs);
+			Vector2D operator+(const Vector2D& rhs) const;
+			Vector2D operator-(const Vector2D& rhs) const;
+			Vector2D operator-() const;
+			Vector2D operator*(const Vector2D& rhs) const;
+			Vector2D operator/(const Vector2D& rhs) const;
+			bool operator==(const Vector2D& rhs) const;
+			bool operator!=(const Vector2D& rhs) const;
+			friend Vector2D operator*(float scaleUnit, const Vector2D& rhs);
+			friend Vector2D operator*(const Vector2D& lhs, float scaleUnit);
 
-		private:
-			float m_x;
-			float m_y;
-			float m_length;
+			/* =============================================================
+			* MEMBERS
+			* ============================================================= */
+			float x;
+			float y;
+			float length;
 		};
 	}
 }

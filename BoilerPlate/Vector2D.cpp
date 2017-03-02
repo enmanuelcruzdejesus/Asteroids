@@ -1,132 +1,184 @@
 #include "Vector2D.h"
+#include <cmath>
+
+
+
 namespace Engine
 {
-	namespace Math 
+	namespace Math
 	{
+		Vector2D Vector2D::Origin = Vector2D();
+
 		Vector2D::Vector2D()
+			: x(0.0f)
+			, y(0.0f)
+			, length(0.0f)
+		{}
+
+		Vector2D::Vector2D(float uniform)
+			: x(uniform)
+			, y(uniform)
+			, length(0)
 		{
+			// Calculate length for the given point
+			//
+			Length();
 		}
+
 		Vector2D::Vector2D(float x, float y)
+			: x(x)
+			, y(y)
+			, length(0)
 		{
-			this->m_x = x;
-			this->m_y = y;
+			// Calculate length for the given point
+			//
+			Length();
 		}
-		float Vector2D::Length()
+
+		float Vector2D::Length() const
 		{
-			return this->m_length;
+			return std::sqrt(x * x + y * y);
 		}
-		float Vector2D::GetX()
+
+		float Vector2D::SquaredLength() const
 		{
-			return this->m_x;;
+			return x * x + y * y;
 		}
-		float Vector2D::GetY()
+
+		float Vector2D::Normalize()
 		{
-			return 	this->m_y;
+			// Calculating the length
+			Length();
+
+			float inverseScale = 1.0f / length;
+			x *= inverseScale;
+			y *= inverseScale;
+
+			return length;
 		}
-		Vector2D & Vector2D::operator=(const Vector2D & rigth)
+
+		// operators
+		//
+		Vector2D& Vector2D::operator=(const Vector2D& rhs)
 		{
-			
 			// Prevent self assignment. Two objects
 			// are equal if their memory address are equal.
-			if (this == &rigth)
+			if (this == &rhs)
 			{
 				return *this;
 			}
 
-			m_x = rigth.m_x;
-			m_y = rigth.m_y;
+			x = rhs.x;
+			y = rhs.y;
 
 			return *this;
 		}
-		Vector2D & Vector2D::operator+=(const Vector2D & rigth)
+
+		Vector2D& Vector2D::operator+=(const Vector2D& rhs)
 		{
-			m_x = m_x + rigth.m_x;
-			m_y = m_y + rigth.m_y;
+			x = x + rhs.x;
+			y = y + rhs.y;
 
 			return *this;
 		}
-		Vector2D & Vector2D::operator-=(const Vector2D & rigth)
-		{
 
-			m_x = m_x - rigth.m_x;
-			m_y = m_y - rigth.m_y;
-			return *this;
-		}
-		Vector2D & Vector2D::operator*=(const Vector2D & rigth)
+		Vector2D& Vector2D::operator-=(const Vector2D& rhs)
 		{
-			m_x = m_x * rigth.m_x;
-			m_y = m_y * rigth.m_y;
+			x = x - rhs.x;
+			y = y - rhs.y;
+
 			return *this;
 		}
-		Vector2D & Vector2D::operator/=(const Vector2D & rigth)
+
+		Vector2D& Vector2D::operator*=(const Vector2D& rhs)
 		{
-			m_x = m_x / rigth.m_x;
-			m_y = m_y / rigth.m_y;
+			x = x * rhs.x;
+			y = y * rhs.y;
+
 			return *this;
 		}
-		Vector2D Vector2D::operator+(const Vector2D & rigth)
+
+		Vector2D& Vector2D::operator/=(const Vector2D& rhs)
+		{
+			x = x / rhs.x;
+			y = y / rhs.y;
+
+			return *this;
+		}
+
+		Vector2D Vector2D::operator+(const Vector2D& rhs) const
 		{
 			Vector2D sum;
 
-			sum.m_x = m_x + rigth.m_x;
-			sum.m_y = m_y + rigth.m_y;
+			sum.x = x + rhs.x;
+			sum.y = y + rhs.y;
 
 			return sum;
 		}
-		Vector2D Vector2D::operator-(const Vector2D & rigth)
-		{
-			Vector2D dif;
 
-			dif.m_x = m_x + rigth.m_x;
-			dif.m_y = m_y + rigth.m_y;
-
-			return dif;
-		}
-		Vector2D Vector2D::operator-()
+		Vector2D Vector2D::operator-(const Vector2D& rhs) const
 		{
-			return Vector2D(-m_x, -m_y);
-		}
-		Vector2D Vector2D::operator*(const Vector2D & rigth)
-		{
-			Vector2D mul;
+			Vector2D sub;
+			sub.x = x - rhs.x;
+			sub.y = y - rhs.y;
 
-			mul.m_y = m_y * rigth.m_y;
-			mul.m_x = m_x * rigth.m_x;
+			return sub;
+		}
 
-			return mul;
-		}
-		Vector2D Vector2D::operator/(const Vector2D & rigth)
+		Vector2D Vector2D::operator-() const
 		{
-			Vector2D div;
+			return Vector2D(-x, -y);
+		}
 
-			div.m_y = m_y / rigth.m_y;
-			div.m_x = m_x / rigth.m_x;
-
-			return div;
-		}
-		bool Vector2D::operator==(const Vector2D & rigth)
-		{
-			return m_x == rigth.m_x && m_y == rigth.m_y;
-		}
-		bool Vector2D::operator!=(const Vector2D & rigth)
-		{
-			return m_x != rigth.m_x ||
-				m_y != rigth.m_y;;
-		}
-		Vector2D operator*(float scaleUnit, const Vector2D & rigth)
+		Vector2D Vector2D::operator*(const Vector2D& rhs) const
 		{
 			Vector2D scaled;
-			scaled.m_x = scaleUnit * rigth.m_x;
-			scaled.m_y = scaleUnit * rigth.m_y;
+
+			scaled.y = y * rhs.y;
+			scaled.x = x * rhs.x;
 
 			return scaled;
 		}
-		Vector2D operator*(const Vector2D & left, float scaleUnit)
-		{
 
+		Vector2D Vector2D::operator/(const Vector2D& rhs) const
+		{
+			Vector2D inverseScaled;
+
+			inverseScaled.x = x / rhs.x;
+			inverseScaled.y = y / rhs.y;
+
+			return inverseScaled;
+		}
+
+		bool Vector2D::operator==(const Vector2D& rhs) const
+		{
+			return
+				x == rhs.x &&
+				y == rhs.y;
+		}
+
+		bool Vector2D::operator!=(const Vector2D& rhs) const
+		{
+			return
+				x != rhs.x ||
+				y != rhs.y;
+		}
+
+		// friend functions
+		Vector2D operator*(float scaleUnit, const Vector2D& rhs)
+		{
 			Vector2D scaled;
-			scaled.m_x = scaleUnit * left.m_x;
-			scaled.m_y = scaleUnit * left.m_y;
+			scaled.x = scaleUnit * rhs.x;
+			scaled.y = scaleUnit * rhs.y;
+
+			return scaled;
+		}
+
+		Vector2D operator*(const Vector2D& lhs, float scaleUnit)
+		{
+			Vector2D scaled;
+			scaled.x = scaleUnit * lhs.x;
+			scaled.y = scaleUnit * lhs.y;
 
 			return scaled;
 		}
