@@ -1,7 +1,9 @@
 #pragma once
-#include "Ship.h"
+#include "vector"
+#include "Vector2D.h"
 
 using namespace std;
+using namespace Engine::Math;
 namespace Asteroids 
 {
 	namespace Utilities 
@@ -9,7 +11,10 @@ namespace Asteroids
 		class AppConfig 
 		{
 		public:
-			std::vector<Entities::Ship*> Initialize();
+			AppConfig();
+			std::vector<vector<Vector2D>> Initialize();
+		private:
+		
 		};
 	}
 }

@@ -30,6 +30,9 @@
     <ClCompile Include="AppConfig.cpp">
       <Filter>Game\Source Files\Utilities</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -37,9 +40,6 @@
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="Vector2D.h">
       <Filter>Engine\Header files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Drawable2D.h">
-      <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="StringHelper.h">
       <Filter>Engine\Header files\Helpers</Filter>
@@ -58,6 +58,15 @@
     </ClInclude>
     <ClInclude Include="AppConfig.h">
       <Filter>Game\Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawable2D.h">
+      <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +123,12 @@
     </Filter>
     <Filter Include="Game\Source Files\Utilities">
       <UniqueIdentifier>{a5a88c92-3fe2-461d-850d-20f3e8603faf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{dffa1751-88e8-474f-9230-bc3865dba202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{71743f29-67ed-4990-927b-5d6c286c6699}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

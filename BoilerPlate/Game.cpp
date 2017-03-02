@@ -1,0 +1,251 @@
+
+#include "Game.h"
+#include "iostream"
+#include "glew.h"
+#include "SDL_opengl.h"
+#include "AppConfig.h"
+using namespace Engine::Math;
+using namespace Asteroids::Entities;
+using namespace Asteroids::Utilities;
+Game* Game::m_instance = 0;
+
+
+//CTOR
+Game::Game()
+{
+}
+
+Game::~Game()
+{
+}
+
+//GETTERS AND SETTERS
+
+std::string Game::getWindowTitle()
+{
+	return m_windowTitle;
+}
+
+int Game::getWindowXPos()
+{
+	return m_windowXPos;
+}
+
+int Game::getWindowYPos()
+{
+	return m_windowYPos;
+}
+
+int Game::getWindowWidth()
+{
+	return m_windowWidth;
+}
+
+int Game::getWindowHeight()
+{
+	return m_windowHeight;
+}
+
+void Game::setWindowTitle(std::string gameTitle)
+{
+	m_windowTitle = gameTitle;
+}
+
+void Game::setWindowXPos(int xpos)
+{
+	m_windowXPos = xpos;
+}
+
+void Game::setWindowYPos(int ypos)
+{
+	m_windowYPos = ypos;
+}
+
+void Game::setWindowWidth(int width)
+{
+	m_windowWidth = width;
+}
+
+void Game::setWindowHeight(int height)
+{
+	m_windowHeight = height;
+}
+
+Game * Game::Instance()
+{
+	if (Game::m_instance == 0)
+	{
+		Game::m_instance = new Game();
+		return Game::m_instance;
+	}
+	return Game::m_instance;
+}
+
+
+
+
+//*****PUBLIC FUNCTIONS*****/
+bool Game::init(const char * title, int xpos, int ypos, int width, int height, int flags)
+{
+
+	// Init the external dependencies
+	//
+	bool success = initSDL() && initGlew();
+	if (!success)
+	{
+		m_running = false;
+		return false;
+	}
+
+	// Setup the viewport
+	//
+	SetupViewPort();
+
+	// Change game state
+	//
+	/*m_state = GameState::INIT_SUCCESSFUL;*/
+	
+
+	std::cout << "init success\n";
+	m_running = true;// everything inited successfully 
+					  //star the main loop
+	return true;
+}
+
+bool Game::running()
+{
+	return  m_running;
+}
+
+void Game::quit()
+{
+	m_running = false;
+}
+
+
+void Game::handleEvents()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event))
+	{
+		if (event.type == SDL_QUIT)
+		{
+			Game::Instance()->quit();
+		}
+	}
+}
+
+void Game::update()
+{
+	//for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	//{
+	//	m_gameObjects[i]->update();
+	//}
+}
+
+
+void Game::render()
+{
+	//glClearColor(1, 1, 1, 1);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//glLoadIdentity();
+
+	//glTranslatef(100,100,0);
+	//glColor3f(0, 0, 1);
+	//glBegin(GL_LINE_LOOP);
+	//for each (Vector2D v in dam)
+	//{
+	//	glVertex2f(v.GetX(), v.GetY());
+	//}
+	//glEnd();
+	std::cout << "adfasfa";
+}
+
+
+void Game::clean()
+{
+	std::cout << "cleaning game\n";
+	SDL_DestroyWindow(m_Window);
+	//InputHandler::Instance()->clean();
+	SDL_Quit();
+}
+\
+
+//******PRIVATE FUNCTIONS******/
+
+bool Game::initSDL()
+{
+	// Initialize SDL's Video subsystem
+	//
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	{
+		std::cerr << "Failed to init SDL" << std::endl;
+		return false;
+	}
+
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
+	Uint32 flags = SDL_WINDOW_OPENGL |
+		SDL_WINDOW_SHOWN |
+		SDL_WINDOW_RESIZABLE;
+
+    this->m_Window = SDL_CreateWindow(m_windowTitle.c_str(), m_windowXPos,m_windowYPos,m_windowWidth,m_windowHeight,flags);
+
+	if (!m_Window)
+	{
+		std::cerr << "Failed to create window!" << std::endl;
+		SDL_Quit();
+		return false;
+	}
+
+	m_context = SDL_GL_CreateContext(m_Window);
+	SDL_GL_MakeCurrent(m_Window, m_context);
+
+	// Make double buffer interval synced with vertical scanline refresh
+	SDL_GL_SetSwapInterval(0);
+
+	return true;
+}
+
+
+bool Game::initGlew()
+{
+	GLenum err = glewInit();
+	if (GLEW_OK != err)
+	{
+		std::cerr << "Error: " << glewGetErrorString(err) << std::endl;
+		return false;
+	}
+
+	return true;
+}
+
+
+void Game::SetupViewPort()
+{
+	// Defining ortho values
+	//
+	float halfWidth = m_windowWidth * 0.5f;
+	float halfHeight = m_windowHeight * 0.5f;
+
+	// Set viewport to match window
+	//
+	glViewport(0, 0, m_windowWidth, m_windowHeight);
+
+	// Set Mode to GL_PROJECTION
+	//
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
+	// Set projection MATRIX to ORTHO
+	//
+	glOrtho(-halfWidth, halfWidth, -halfHeight, halfHeight, -1, 1);
+
+	// Setting Mode to GL_MODELVIEW
+	//
+	glMatrixMode(GL_MODELVIEW);
+}
+
+
+

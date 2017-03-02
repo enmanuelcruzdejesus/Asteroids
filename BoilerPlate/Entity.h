@@ -7,7 +7,7 @@ namespace Asteroids
 {
 	namespace Entities 
 	{
-		class Entity: public Engine::Graphics::Drawable2D
+		class Entity
 		{
 	
 		};

@@ -12,17 +12,33 @@ namespace Asteroids
 {
 	namespace Utilities 
 	{
-		std::vector<Entities::Ship*> AppConfig::Initialize()
+
+		/*AppConfig* AppConfig::m_instance = 0;
+		AppConfig * AppConfig::Instance()
+		{
+			if (AppConfig::Instance == 0) 
+			{
+				AppConfig::m_instance = new AppConfig();
+				return AppConfig::m_instance;
+			}
+			return AppConfig::m_instance;
+		}
+*/
+		AppConfig::AppConfig()
+		{
+		}
+
+		std::vector<vector<Vector2D>> AppConfig::Initialize()
 		{
 			string local_dir = DirectoryUtils::GetExeFileName();
 			string folder = "Models";
-			string path = DirectoryUtils::PathCombine(local_dir,folder);
+			string path = DirectoryUtils::PathCombine(local_dir, folder);
 
 			DirectoryUtils* directory = new DirectoryUtils(path);
 			//Getting the files from the models directory
 			auto dataModel = directory->GetDir();
-			vector<Ship*> ships;
-    
+			vector<vector<Vector2D>> all_points;
+
 			for (auto model : dataModel)
 			{
 				string newpath = DirectoryUtils::PathCombine(path, model);
@@ -34,8 +50,11 @@ namespace Asteroids
 					Vector2D v = Vector2D(stof(split[0]), stof(split[1]));
 					points.push_back(v);
 				}
-				ships.push_back(new Ship(points));
+				all_points.push_back(points);
 			}
+
+			return all_points;
 		}
+
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace Engine
 {
-	namespace StringHelper 
+	namespace Helpers 
 	{
 		vector<string> StringHelper::split(const string & str, const string & delim)
 		{

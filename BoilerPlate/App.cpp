@@ -3,8 +3,8 @@
 #include <algorithm>
 
 // OpenGL includes
-#include <GL/glew.h>
-#include <SDL2/SDL_opengl.h>
+#include <glew.h>
+#include <SDL_opengl.h>
 
 namespace Engine
 {

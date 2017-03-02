@@ -9,10 +9,7 @@
 
 // 
 #include "App.hpp"
-#include "DirectoryUtils.h"
-#include "IOUtils.h"
-#include "fstream"
-
+#include "Game.h"
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
@@ -29,46 +26,21 @@ int main(int argc, char* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	string local_dir = Engine::FileSystem::DirectoryUtils::GetExeFileName();
-	string file = "Models";
-	string file_path = local_dir + "\\" + file;
+	Uint32 flags = SDL_WINDOW_OPENGL |
+		SDL_WINDOW_SHOWN |
+		SDL_WINDOW_RESIZABLE;
 	
-	Engine::FileSystem::DirectoryUtils* dirObject = new Engine::FileSystem::DirectoryUtils(file_path);
-	vector<string> directoryList = dirObject->GetDir();
-	
-	string newPath = "";
-	for each (string dirItem in directoryList)
-	{
-		std::cout <<"***"<<dirItem <<"***"<< endl;
-		newPath = file_path + "\\" + dirItem;
-		vector<string> contentFile = Engine::FileSystem::IOUtils::GetConentFile(newPath);
-		for each (string item in contentFile)
+	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, flags))
+	{ 
+		while (Game::Instance()->running()) 
 		{
-			std::cout << item << endl;
+
+			Game::Instance()->handleEvents();
+			Game::Instance()->update();
+			Game::Instance()->render();
 		}
 	}
-	
 
-
-	// Create Game Object
-	//
-	Engine::App* app = new Engine::App("Boiler Plate!", WIDTH, HEIGHT);
-
-	// Initialize game
-	//
-	if(!app->Init())
-	{
-		std::cout << "App Init error!\n";
-		return -1;
-	}
-
-	// Execute game
-	//
-	app->Execute();
-
-	// Delete game object
-	//
-	delete app;
-
+	Game::Instance()->clean();
 	return 0;
 }
