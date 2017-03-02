@@ -68,6 +68,9 @@
     <ClInclude Include="Drawable2D.h">
       <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="BaseEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

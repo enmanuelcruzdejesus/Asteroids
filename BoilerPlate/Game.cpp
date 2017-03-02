@@ -85,8 +85,14 @@ Game * Game::Instance()
 
 
 //*****PUBLIC FUNCTIONS*****/
-bool Game::init(const char * title, int xpos, int ypos, int width, int height, int flags)
+bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 {
+
+	setWindowTitle(title);
+	setWindowXPos(xpos);
+	setWindowYPos(ypos);
+	setWindowWidth(width);
+	setWindowHeight(height);
 
 	// Init the external dependencies
 	//
@@ -105,8 +111,6 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height, i
 	//
 	/*m_state = GameState::INIT_SUCCESSFUL;*/
 	
-
-	std::cout << "init success\n";
 	m_running = true;// everything inited successfully 
 					  //star the main loop
 	return true;
@@ -146,19 +150,17 @@ void Game::update()
 
 void Game::render()
 {
-	//glClearColor(1, 1, 1, 1);
-	//glClear(GL_COLOR_BUFFER_BIT);
-	//glLoadIdentity();
+	glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 
-	//glTranslatef(100,100,0);
-	//glColor3f(0, 0, 1);
-	//glBegin(GL_LINE_LOOP);
-	//for each (Vector2D v in dam)
-	//{
-	//	glVertex2f(v.GetX(), v.GetY());
-	//}
-	//glEnd();
-	std::cout << "adfasfa";
+	glBegin(GL_LINE_LOOP);
+	glVertex2f(50.0, 50.0);
+	glVertex2f(50.0, -50.0);
+	glVertex2f(-50.0, -50.0);
+	glVertex2f(-50.0, 50.0);
+	glEnd();
+
+	SDL_GL_SwapWindow(m_Window);
 }
 
 

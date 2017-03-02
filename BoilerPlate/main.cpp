@@ -26,11 +26,9 @@ int main(int argc, char* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
-	Uint32 flags = SDL_WINDOW_OPENGL |
-		SDL_WINDOW_SHOWN |
-		SDL_WINDOW_RESIZABLE;
+
 	
-	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, flags))
+	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT))
 	{ 
 		while (Game::Instance()->running()) 
 		{

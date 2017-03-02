@@ -23,7 +23,7 @@ public:
 	void setWindowWidth(int width);
 	void setWindowHeight(int height);
 	//simply set the running variable to true
-	bool init(const char* title, int xpos, int ypos, int width, int height, int flags);
+	bool init(const char* title, int xpos, int ypos, int width, int height);
 	void render();
 	void update();
 	void handleEvents();
