@@ -110,9 +110,19 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	// Change game state
 	//
 	/*m_state = GameState::INIT_SUCCESSFUL;*/
+
+
+
 	
 	m_running = true;// everything inited successfully 
 					  //star the main loop
+
+	AppConfig* app = new AppConfig();
+	currentPlayer = 0;
+	for each (vector<Vector2D> points  in app->Initialize())
+	{
+		m_players.push_back(Player(points));
+	}
 	return true;
 }
 

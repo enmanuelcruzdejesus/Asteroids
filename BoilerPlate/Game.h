@@ -7,6 +7,9 @@
 #include "Vector2D.h"
 #include "GameObject.h"
 #include "Ship.h"
+#include "GameObject.h"
+#include "Player.h"
+#include "AppConfig.h"
 using namespace Engine::Math;
 class Game
 {
@@ -43,6 +46,8 @@ private:
 	std::string m_windowTitle;
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
+	vector<Player> m_players;
+	int currentPlayer;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();

@@ -5,9 +5,9 @@
 class GameObject {
 
 public:
-	virtual void update() = 0;
-	virtual void draw() = 0;
-	virtual void clean() = 0;
+	virtual void Update() = 0;
+	virtual void Render(int mode) = 0;
+	virtual void Clean() = 0;
 protected:
 	GameObject() {}
 	virtual ~GameObject() {};
