@@ -47,10 +47,12 @@ private:
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
 //	vector<Player> m_players;
-	int currentPlayer;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();
+	vector<vector<Vector2D>> players;
+	vector<Vector2D>currentPlayer;
+	int currentIndexPlayer;
 	
 };
 #endif
