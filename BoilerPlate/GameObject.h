@@ -1,7 +1,6 @@
 #pragma once
 #ifndef _GameObject_
 #define _GameObject_
-#include "SDL.h"
 class GameObject {
 
 public:

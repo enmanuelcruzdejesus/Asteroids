@@ -46,7 +46,6 @@ private:
 	std::string m_windowTitle;
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
-//	vector<Player> m_players;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();

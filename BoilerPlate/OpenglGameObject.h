@@ -21,7 +21,7 @@ public:
 
 protected:
 	Engine::Math::Vector2D m_position;
-	std::vector<Engine::Math::Vector2D> m_points;
+	vector<Engine::Math::Vector2D> m_points;
 	RigidBodyComponent* m_physics;
 	TransformationComponent* m_transforms;
 	Engine::Math::Vector3 m_color;
