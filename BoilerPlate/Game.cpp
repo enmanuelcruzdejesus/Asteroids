@@ -112,17 +112,16 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	/*m_state = GameState::INIT_SUCCESSFUL;*/
 
 
+	AppConfig* app = new AppConfig();
+	this->players = app->Initialize();
+	this-> currentIndexPlayer = 0;
+	this->currentPlayer = players[currentIndexPlayer];
+
 
 	
 	m_running = true;// everything inited successfully 
 					  //star the main loop
 
-	//AppConfig* app = new AppConfig();
-	//currentPlayer = 0;
-	//for each (vector<Vector2D> points  in app->Initialize())
-	//{
-	//	m_players.push_back(Player(points));
-	//}
 	return true;
 }
 
@@ -140,13 +139,45 @@ void Game::quit()
 void Game::handleEvents()
 {
 	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_QUIT)
-		{
-			Game::Instance()->quit();
+	
+		/* Poll for events. SDL_PollEvent() returns 0 when there are no  */
+		/* more events on the event queue, our while loop will exit when */
+		/* that occurs.                                                  */
+		while (SDL_PollEvent(&event)) {
+			/* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
+			switch (event.type) {
+			case SDL_KEYDOWN:
+				std::cout<<"Key press detected\n";
+				break;
+
+			case SDL_KEYUP:
+				cout<<"Key release detected\n";
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_SPACE :
+					if (currentIndexPlayer == 2) 
+					{ 
+						currentIndexPlayer = 0; 
+						this->currentPlayer = players[0];
+						return;
+					}
+					currentIndexPlayer++;
+					this->currentPlayer = this->players[currentIndexPlayer];
+					break;
+				default:
+					break;
+				}
+				break;
+
+			
+			case SDL_QUIT:
+				m_running = false;
+				break;
+
+			default:
+				break;
+			}
 		}
-	}
 }
 
 void Game::update()
@@ -162,12 +193,13 @@ void Game::render()
 {
 	glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	
 
 	glBegin(GL_LINE_LOOP);
-	glVertex2f(50.0, 50.0);
-	glVertex2f(50.0, -50.0);
-	glVertex2f(-50.0, -50.0);
-	glVertex2f(-50.0, 50.0);
+	for each (Vector2D point in currentPlayer)
+	{
+		glVertex2f(point.x, point.y);
+	}
 	glEnd();
 
 	SDL_GL_SwapWindow(m_Window);
