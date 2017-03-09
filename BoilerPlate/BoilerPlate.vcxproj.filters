@@ -101,6 +101,9 @@
     <ClInclude Include="ShipPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MathUtilities.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Engine">

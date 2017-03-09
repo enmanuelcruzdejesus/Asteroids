@@ -27,7 +27,6 @@ int main(int argc, char* argv[])
 #endif
 
 
-	
 	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT))
 	{ 
 		while (Game::Instance()->running()) 
@@ -39,6 +38,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	Game::Instance()->clean();
+	delete Game::Instance();
 	return 0;
 }

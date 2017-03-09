@@ -5,16 +5,13 @@
 #include "iostream"
 #include "vector"
 #include "Vector2D.h"
-#include "GameObject.h"
-#include "Ship.h"
-#include "GameObject.h"
-//#include "Player.h"
-#include "AppConfig.h"
+#include "ShipPlayer.h"
+
 using namespace Engine::Math;
 class Game
 {
 public:
-	
+	~Game();
 	std::string getWindowTitle();
 	int getWindowXPos();
 	int getWindowYPos();
@@ -36,7 +33,6 @@ public:
 	void quit();
 private:
 	Game();
-	~Game();
 	static Game* m_instance;
 	int m_windowWidth;
 	int m_windowHeight;
@@ -49,9 +45,9 @@ private:
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();
-	vector<vector<Vector2D>> players;
-	vector<Vector2D>currentPlayer;
-	int currentIndexPlayer;
+	void CreatePlayers();
+	ShipPlayer* m_player;
+	vector<GameObject*> m_gameObjects;
 	
 };
 #endif

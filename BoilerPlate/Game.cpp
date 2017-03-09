@@ -4,6 +4,7 @@
 #include "glew.h"
 #include "SDL_opengl.h"
 #include "AppConfig.h"
+#include "Entity.h"
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -13,10 +14,14 @@ Game* Game::m_instance = 0;
 //CTOR
 Game::Game()
 {
+	
 }
 
 Game::~Game()
 {
+	clean();
+	delete m_instance;
+	m_instance = nullptr;
 }
 
 //GETTERS AND SETTERS
@@ -83,7 +88,6 @@ Game * Game::Instance()
 
 
 
-
 //*****PUBLIC FUNCTIONS*****/
 bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 {
@@ -107,22 +111,16 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	//
 	SetupViewPort();
 
-	// Change game state
-	//
-	/*m_state = GameState::INIT_SUCCESSFUL;*/
 
 
-	AppConfig* app = new AppConfig();
-	this->players = app->Initialize();
-	this-> currentIndexPlayer = 0;
-	this->currentPlayer = players[currentIndexPlayer];
-
-
-	
 	m_running = true;// everything inited successfully 
 					  //star the main loop
 
-	return true;
+    
+	//Creating Players
+	CreatePlayers();
+
+	return m_running;
 }
 
 bool Game::running()
@@ -148,21 +146,22 @@ void Game::handleEvents()
 			switch (event.type) {
 			case SDL_KEYDOWN:
 				std::cout<<"Key press detected\n";
+				switch (event.key.keysym.sym)
+				{
+				case SDLK_w:
+					m_player->MoveUp();
+					break;
+				default:
+					break;
+				}
 				break;
 
 			case SDL_KEYUP:
 				cout<<"Key release detected\n";
 				switch (event.key.keysym.sym)
 				{
-				case SDLK_SPACE :
-					if (currentIndexPlayer == 2) 
-					{ 
-						currentIndexPlayer = 0; 
-						this->currentPlayer = players[0];
-						return;
-					}
-					currentIndexPlayer++;
-					this->currentPlayer = this->players[currentIndexPlayer];
+				case SDLK_c :
+					m_player->SwitchPlayer();
 					break;
 				default:
 					break;
@@ -194,13 +193,10 @@ void Game::render()
 	glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 	
-
-	glBegin(GL_LINE_LOOP);
-	for each (Vector2D point in currentPlayer)
+	for each (GameObject*  gObject in m_gameObjects)
 	{
-		glVertex2f(point.x, point.y);
+		gObject->Render(GL_LINE_LOOP);
 	}
-	glEnd();
 
 	SDL_GL_SwapWindow(m_Window);
 }
@@ -209,8 +205,10 @@ void Game::render()
 void Game::clean()
 {
 	std::cout << "cleaning game\n";
+	SDL_GL_DeleteContext(m_context);
 	SDL_DestroyWindow(m_Window);
 	//InputHandler::Instance()->clean();
+	m_gameObjects.clear();
 	SDL_Quit();
 }
 \
@@ -289,6 +287,15 @@ void Game::SetupViewPort()
 	// Setting Mode to GL_MODELVIEW
 	//
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void Game::CreatePlayers()
+{
+	AppConfig* app = new AppConfig();
+	auto dataplayers = app->Initialize();
+    m_player = new ShipPlayer(dataplayers, new RigidBodyComponent(), new TransformationComponent(), Vector3(1.0f));
+	this->m_gameObjects.push_back(m_player);
+	delete app;
 }
 
 
