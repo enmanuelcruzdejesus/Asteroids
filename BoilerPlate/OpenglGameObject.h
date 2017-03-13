@@ -20,12 +20,10 @@ public:
 	void setColor(Engine::Math::Vector3 color);
 
 protected:
-	Engine::Math::Vector2D m_position;
 	vector<Engine::Math::Vector2D> m_points;
 	RigidBodyComponent* m_physics;
 	TransformationComponent* m_transforms;
 	Engine::Math::Vector3 m_color;
-	float m_angle;
 	int wrap(int x, int min, int max);
 
 };

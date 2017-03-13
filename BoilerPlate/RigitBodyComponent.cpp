@@ -25,9 +25,12 @@
 		//
 		m_velocity += m_gravity;
 
+
 		// Apply drag
 		//
 		m_velocity *= m_drag;
+
+
 
 		// Base class function call
 		//

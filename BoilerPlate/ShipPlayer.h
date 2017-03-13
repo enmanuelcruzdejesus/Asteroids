@@ -16,11 +16,11 @@ public :
 	void MoveUp();
 	void MoveLeft();
 	void MoveRigth();
-	void MoveDown();
 	void SwitchPlayer();
 private:
 	int m_currentIndexPlayer;
 	vector<vector<Vector2D>> m_players;
+	void CalculateMass();
 };
 #endif // !_ShipPlayer_
 

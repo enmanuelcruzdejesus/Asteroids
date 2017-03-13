@@ -5,16 +5,10 @@
 
 
 
-OpenglGameObject::OpenglGameObject(vector<Vector2D> points)
+OpenglGameObject::OpenglGameObject(vector<Vector2D> points):
+m_transforms(nullptr),
+m_physics(nullptr)
 {
-	m_points = points;
-	m_physics = new RigidBodyComponent(
-		Engine::Math::Vector2D(0.0f),
-		m_transforms->GetPosition(),
-		1.0f,
-		0.999f
-		);
-	m_transforms = new TransformationComponent();
 }
 
 OpenglGameObject::OpenglGameObject(vector<Vector2D> points, RigidBodyComponent* physic, TransformationComponent* transport, Vector3 color):
@@ -58,6 +52,9 @@ void OpenglGameObject::Update(double deltaTime)
 
 	// Set the new position
 	m_transforms->Teleport(x, y);
+
+
+	this->m_physics->Update(deltaTime);
 
 }
 

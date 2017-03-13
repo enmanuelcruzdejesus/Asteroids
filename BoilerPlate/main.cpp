@@ -13,6 +13,8 @@
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
+const int FPS = 60;
+const int DELAY_TIME = 1000.0f / FPS;
 
 
 
@@ -26,15 +28,25 @@ int main(int argc, char* argv[])
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
+	Uint32 frameStart, frameTime;
 
 	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT))
 	{ 
 		while (Game::Instance()->running()) 
 		{
+			frameStart = SDL_GetTicks();
 
 			Game::Instance()->handleEvents();
 			Game::Instance()->update();
 			Game::Instance()->render();
+
+			frameTime = SDL_GetTicks() - frameStart;
+
+			if (frameTime < DELAY_TIME) 
+			{
+				SDL_Delay((int)(DELAY_TIME - frameTime));
+			}
+
 		}
 	}
 

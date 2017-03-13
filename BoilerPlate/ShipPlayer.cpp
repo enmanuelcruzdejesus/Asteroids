@@ -1,25 +1,46 @@
 #include "ShipPlayer.h"
 #include "MathUtilities.h"
+#include "iostream"
+
+
 const float ANGLE_OFFSET = 90.0f;
 const float THRUST = 3.0f;
 const float MAX_SPEED = 350.0f;
+const float ROTATION_SPEED = 5.0f;
 
-ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points){}
+ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
+{
+	m_transforms = new TransformationComponent();
+
+	m_physics = new RigidBodyComponent(
+		Engine::Math::Vector2D(0.0f),
+		m_transforms->GetPosition(),
+		1.0f,
+		0.999f
+		);
+
+	m_color = Vector3(1.0f);
+
+	CalculateMass();
+}
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, TransformationComponent * transforms, Vector3 color) :
-	OpenglGameObject(points,physics,transforms,color){ this->m_currentIndexPlayer = 0;}
+	OpenglGameObject(points,physics,transforms,color){
+	this->m_currentIndexPlayer = 0;
+	CalculateMass();
+}
 
 ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* physics, TransformationComponent* tranforms, Vector3 color) :
 	OpenglGameObject(players.at(0),physics,tranforms,color)
 {
+
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
+
+	CalculateMass();
 }
 
-
-ShipPlayer::~ShipPlayer()
-{
-}
+ShipPlayer::~ShipPlayer(){}
 
 void ShipPlayer::setPlayers(vector<vector<Vector2D>> players)
 {
@@ -29,7 +50,6 @@ void ShipPlayer::setPlayers(vector<vector<Vector2D>> players)
 
 void ShipPlayer::Update(double deltaTime)
 {
-	
 	OpenglGameObject::Update(deltaTime);
 }
 
@@ -49,19 +69,19 @@ void ShipPlayer::MoveUp()
 		Engine::Math::Vector2D(THRUST),
 		m_transforms->GetAngleIRadians() + Engine::Math::DegreesToRadians(ANGLE_OFFSET)
 		);
+    
 }
 
 void ShipPlayer::MoveLeft()
 {
+	m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() + ROTATION_SPEED);
 }
 
 void ShipPlayer::MoveRigth()
 {
+	m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() - ROTATION_SPEED);
 }
 
-void ShipPlayer::MoveDown()
-{
-}
 
 void ShipPlayer::SwitchPlayer()
 {
@@ -74,7 +94,17 @@ void ShipPlayer::SwitchPlayer()
 		m_points = this->m_players[m_currentIndexPlayer];
 		return;
 	}
-
 	m_currentIndexPlayer++;
 	OpenglGameObject::m_points = this->m_players[m_currentIndexPlayer];	
+
+	//calculating the mass of the new player
+	CalculateMass();
 }
+
+void ShipPlayer::CalculateMass()
+{
+	// Set the mass, proportional to the ship size (asumming points defines size)
+	//
+	this->m_physics->SetMass(m_points.size()/10);
+}
+

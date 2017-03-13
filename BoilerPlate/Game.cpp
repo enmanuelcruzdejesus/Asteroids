@@ -8,6 +8,9 @@
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
+
+const float DESIRED_FRAME_RATE = 60.0f;
+const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 Game* Game::m_instance = 0;
 
 
@@ -151,6 +154,14 @@ void Game::handleEvents()
 				case SDLK_w:
 					m_player->MoveUp();
 					break;
+
+				case SDLK_a:
+					m_player->MoveLeft();
+					break;
+
+				case SDLK_d:
+					m_player->MoveRigth();
+					break;
 				default:
 					break;
 				}
@@ -181,10 +192,10 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	//for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
-	//{
-	//	m_gameObjects[i]->update();
-	//}
+	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	{
+		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
+	}
 }
 
 
@@ -293,7 +304,16 @@ void Game::CreatePlayers()
 {
 	AppConfig* app = new AppConfig();
 	auto dataplayers = app->Initialize();
-    m_player = new ShipPlayer(dataplayers, new RigidBodyComponent(), new TransformationComponent(), Vector3(1.0f));
+
+	//Setting up the ship physics
+	RigidBodyComponent* ship_Physics = new RigidBodyComponent(
+		Engine::Math::Vector2D(0.0f),
+		Vector2D(0),
+		1.0f,
+		0.999f
+		);
+
+    m_player = new ShipPlayer(dataplayers, ship_Physics, new TransformationComponent(), Vector3(1.0f));
 	this->m_gameObjects.push_back(m_player);
 	delete app;
 }
