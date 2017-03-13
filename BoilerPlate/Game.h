@@ -46,15 +46,13 @@ private:
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
 	ShipPlayer* m_player;
-	list<OpenglGameObject*> m_gameObjects;
+	vector<OpenglGameObject*> m_gameObjects;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();
 	void CreatePlayers();
 	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size, Vector2D pos);
 	void CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position);
-	void CheckCollision(OpenglGameObject* object);
-	
 	
 };
 #endif

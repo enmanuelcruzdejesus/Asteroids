@@ -197,13 +197,21 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	for (std::list<OpenglGameObject*>::iterator it = m_gameObjects.begin(); it !=m_gameObjects.end(); ++it )
+	for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 	{
-		(*it)->Update(DESIRED_FRAME_RATE);
-		CheckCollision(*it);
+		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
+		Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
+		if (asteroid) 
+		{
+			if (m_player->IsCollading(asteroid)) 
+			{
+				Asteroid::AsteroidSize::Size asteroidSize = asteroid->GetSize();
+				m_gameObjects.erase(m_gameObjects.begin()+i);
+				CreateDebris(asteroidSize, Vector2D::Origin);
+				
+			}
+		}
 	}
-	
-	
 }
 
 
@@ -350,27 +358,6 @@ void Game::CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position)
 		CreateAsteroids(2, Asteroid::AsteroidSize::SMALL, position);
 	}
 }
-
-void Game::CheckCollision(OpenglGameObject * object)
-{
-	Asteroid* asteroid = dynamic_cast<Asteroid*>(object);
-	if (asteroid)
-	{
-		if (m_player->IsCollading(asteroid))
-		{
-			std::cout << "ASTEROID HITS THE SHIP" << std::endl;
-		}
-		else
-		{
-			std::cout << "STOP" << endl;
-		}
-	}
-}
-
-
-
-
-
 
 
 
