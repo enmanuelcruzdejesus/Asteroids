@@ -19,6 +19,7 @@ public :
 	void SwitchPlayer();
 private:
 	int m_currentIndexPlayer;
+	int m_currentSpeed;
 	vector<vector<Vector2D>> m_players;
 	void CalculateMass();
 };

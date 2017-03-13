@@ -4,8 +4,8 @@
 
 
 const float ANGLE_OFFSET = 90.0f;
-const float THRUST = 3.0f;
-const float MAX_SPEED = 350.0f;
+const float THRUST = 0.01f;
+const float MAX_SPEED = 0.12f;
 const float ROTATION_SPEED = 5.0f;
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
@@ -50,6 +50,20 @@ void ShipPlayer::setPlayers(vector<vector<Vector2D>> players)
 
 void ShipPlayer::Update(double deltaTime)
 {
+	float speed = fabs(m_physics->GetSpeed());
+	if (speed > MAX_SPEED)
+	{
+		m_physics->SetVelocity(
+			Engine::Math::Vector2D(
+				(m_physics->GetVelocity().x / speed) * MAX_SPEED,
+				(m_physics->GetVelocity().y / speed) * MAX_SPEED
+				)
+			);
+
+		m_currentSpeed = fabs(m_physics->GetVelocity().Length());
+	}
+
+	std::cout << m_physics->GetVelocity().Length() <<std::endl;
 	OpenglGameObject::Update(deltaTime);
 }
 

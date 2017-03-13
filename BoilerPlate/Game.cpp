@@ -123,6 +123,8 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	//Creating Players
 	CreatePlayers();
 
+	m_timer = new Engine::TimeManager();
+
 	return m_running;
 }
 

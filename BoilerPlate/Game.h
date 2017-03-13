@@ -6,6 +6,7 @@
 #include "vector"
 #include "Vector2D.h"
 #include "ShipPlayer.h"
+#include "TimeManager.hpp"
 
 using namespace Engine::Math;
 class Game
@@ -39,6 +40,7 @@ private:
 	int m_windowXPos;
 	int m_windowYPos;
 	bool m_running;
+	int m_lastFrameTime;
 	std::string m_windowTitle;
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
@@ -48,6 +50,8 @@ private:
 	void CreatePlayers();
 	ShipPlayer* m_player;
 	vector<GameObject*> m_gameObjects;
+	Engine::TimeManager* m_timer;
+	
 	
 };
 #endif
