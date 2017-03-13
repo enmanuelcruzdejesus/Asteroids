@@ -124,7 +124,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(10, Asteroid::AsteroidSize::BIG);
+	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
@@ -322,11 +322,17 @@ void Game::CreatePlayers()
 	delete app;
 }
 
-void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size)
+void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2D pos)
 {
+
 	for (int i = 0; i <  amount; i++)
 	{
-		m_gameObjects.push_back(new Asteroid(size,Vector2D(0,0)));
+		Asteroid* asteroid = new Asteroid(size, pos);
+		m_gameObjects.push_back(asteroid);
+		if (pos == Vector2D::Origin) 
+		{
+			asteroid->ApplayRandomTraslation();
+		}
 	}
 }
 

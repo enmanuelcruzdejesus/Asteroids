@@ -50,7 +50,7 @@ private:
 	bool initGlew();
 	void SetupViewPort();
 	void CreatePlayers();
-	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size);
+	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2D pos);
 	
 	
 	

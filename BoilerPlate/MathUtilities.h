@@ -23,5 +23,23 @@ namespace Engine
 
 			return static_cast<T>(dist(engine));
 		}
+
+		inline int DieRoll()
+		{
+			// Seed with a real random value, if available
+			std::random_device r;
+
+			// Choose a random mean between 1 and 6
+			std::default_random_engine e1(r());
+			std::uniform_int_distribution<int> uniform_dist(1, 6);
+			int mean = uniform_dist(e1);
+
+			// Generate a normal distribution around that mean
+			std::seed_seq seed2{ r(), r(), r(), r(), r(), r(), r(), r() };
+			std::mt19937 e2(seed2);
+			std::normal_distribution<> normal_dist(mean, 2);
+
+			return static_cast<int>(normal_dist(e2));
+		}
 	}
 }

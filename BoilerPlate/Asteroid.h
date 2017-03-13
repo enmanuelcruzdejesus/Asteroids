@@ -17,11 +17,13 @@ public :
 	~Asteroid();
     void Update(double deltaTime) override;
     void Render(int mode) override;
+	void ApplayRandomTraslation();
 
 private:
 	AsteroidSize::Size m_size;
 	int m_sizeFactor;
 	void GeneratePoints();
 	void ApplayRandomImpulse();
+	
 };
 #endif

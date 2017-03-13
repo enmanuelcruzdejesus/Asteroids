@@ -1,6 +1,8 @@
 #include "Asteroid.h"
 #include "MathUtilities.h"
-#include "iostream"
+#include "Game.h"
+
+
 
 const int NUM_POINTS = 16;
 const float MIN_SIZE = 25.0f;
@@ -26,7 +28,6 @@ Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 		);
 
 	GeneratePoints();
-	//std::cout << m_points.size() << std::endl;
 	ApplayRandomImpulse();
 }
 
@@ -76,11 +77,28 @@ void Asteroid::GeneratePoints()
 
 void Asteroid::ApplayRandomImpulse()
 {
-	float x = Engine::Math::RandomInRange<float>(-150.0f, 150.0f);
-	float y = Engine::Math::RandomInRange<float>(-150.0f, 150.0f);
+	float x = Engine::Math::RandomInRange<float>(-0.01f, 0.01f);
+	float y = Engine::Math::RandomInRange<float>(-0.01f, 0.01f);
 
 	m_physics->ApplyForce(
 		Engine::Math::Vector2D(x, y) + static_cast<float>(m_sizeFactor),
 		m_transforms->GetAngleIRadians()
 		);
+}
+
+void Asteroid::ApplayRandomTraslation()
+{
+	int maxX = Game::Instance()->getWindowWidth() / 2;
+	int maxY = Game::Instance()->getWindowHeight() / 2;
+	int minX = -maxX;
+	int minY = -maxY;
+
+	int randomX = RandomInRange<int>(minX,maxX);
+	int randomY = RandomInRange<int>(minY, maxY);
+
+	m_transforms->Teleport(randomX, randomY);
+
+
+		
+
 }
