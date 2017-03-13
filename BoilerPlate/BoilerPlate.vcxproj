@@ -173,6 +173,8 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppConfig.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
+    <ClCompile Include="MathUtilities.cpp" />
     <ClCompile Include="OpenglGameObject.cpp" />
     <ClCompile Include="DirectoryUtils.cpp" />
     <ClCompile Include="Drawable2D.cpp" />
@@ -194,6 +196,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
   <ItemGroup>
     <ClInclude Include="App.hpp" />
     <ClInclude Include="AppConfig.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="MathUtilities.h" />
     <ClInclude Include="OpenglGameObject.h" />

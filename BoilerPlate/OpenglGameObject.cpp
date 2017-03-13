@@ -5,7 +5,14 @@
 
 
 
+OpenglGameObject::OpenglGameObject():
+m_transforms(nullptr),
+m_physics(nullptr)
+{
+}
+
 OpenglGameObject::OpenglGameObject(vector<Vector2D> points):
+m_points(points),
 m_transforms(nullptr),
 m_physics(nullptr)
 {
@@ -25,6 +32,7 @@ OpenglGameObject::~OpenglGameObject()
 
 void OpenglGameObject::Update(double deltaTime)
 {
+	if (m_points.size() <= 0) return;
 	
 	float m_sceneHalfWidth = (Game::Instance()->getWindowWidth() / 2);
 	float m_sceneHalfHeight = (Game::Instance()->getWindowHeight() / 2);
@@ -61,6 +69,7 @@ void OpenglGameObject::Update(double deltaTime)
 
 void OpenglGameObject::Render(int mode)
 {
+	if (m_points.size() <= 0) return;
 
 	// Reset transformation matrix to identity
 	//

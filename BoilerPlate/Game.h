@@ -6,7 +6,7 @@
 #include "vector"
 #include "Vector2D.h"
 #include "ShipPlayer.h"
-#include "TimeManager.hpp"
+#include "Asteroid.h"
 
 using namespace Engine::Math;
 class Game
@@ -44,13 +44,14 @@ private:
 	std::string m_windowTitle;
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
+	ShipPlayer* m_player;
+	vector<GameObject*> m_gameObjects;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();
 	void CreatePlayers();
-	ShipPlayer* m_player;
-	vector<GameObject*> m_gameObjects;
-	Engine::TimeManager* m_timer;
+	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size);
+	
 	
 	
 };

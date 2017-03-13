@@ -11,6 +11,7 @@ using namespace Engine::Math;
 class OpenglGameObject : public GameObject
 {
 public:
+	OpenglGameObject();
 	OpenglGameObject(vector<Vector2D> points);
 	OpenglGameObject(vector<Vector2D>points,RigidBodyComponent* physics, TransformationComponent* transforms, Vector3 color);
 	~OpenglGameObject();

@@ -123,7 +123,9 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	//Creating Players
 	CreatePlayers();
 
-	m_timer = new Engine::TimeManager();
+	//Creating Asteroids
+	CreateAsteroids(10, Asteroid::AsteroidSize::BIG);
+
 
 	return m_running;
 }
@@ -318,6 +320,14 @@ void Game::CreatePlayers()
     m_player = new ShipPlayer(dataplayers, ship_Physics, new TransformationComponent(), Vector3(1.0f));
 	this->m_gameObjects.push_back(m_player);
 	delete app;
+}
+
+void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size)
+{
+	for (int i = 0; i <  amount; i++)
+	{
+		m_gameObjects.push_back(new Asteroid(size,Vector2D(0,0)));
+	}
 }
 
 
