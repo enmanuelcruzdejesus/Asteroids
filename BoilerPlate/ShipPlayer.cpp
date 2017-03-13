@@ -1,6 +1,5 @@
 #include "ShipPlayer.h"
 #include "MathUtilities.h"
-#include "iostream"
 
 
 const float ANGLE_OFFSET = 90.0f;
@@ -10,6 +9,8 @@ const float ROTATION_SPEED = 5.0f;
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 {
+	m_radius = 10;
+
 	m_transforms = new TransformationComponent();
 
 	m_physics = new RigidBodyComponent(
@@ -26,6 +27,8 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, TransformationComponent * transforms, Vector3 color) :
 	OpenglGameObject(points,physics,transforms,color){
+
+	m_radius = 10;
 	this->m_currentIndexPlayer = 0;
 	CalculateMass();
 }
@@ -33,7 +36,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, Tr
 ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* physics, TransformationComponent* tranforms, Vector3 color) :
 	OpenglGameObject(players.at(0),physics,tranforms,color)
 {
-
+	m_radius = 10;
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
 
@@ -63,7 +66,6 @@ void ShipPlayer::Update(double deltaTime)
 		m_currentSpeed = fabs(m_physics->GetVelocity().Length());
 	}
 
-	std::cout << m_physics->GetVelocity().Length() <<std::endl;
 	OpenglGameObject::Update(deltaTime);
 }
 

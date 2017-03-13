@@ -18,6 +18,7 @@ public :
     void Update(double deltaTime) override;
     void Render(int mode) override;
 	void ApplayRandomTraslation();
+	AsteroidSize::Size GetSize() { return m_size;  };
 
 private:
 	AsteroidSize::Size m_size;

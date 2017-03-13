@@ -30,6 +30,7 @@
 		//
 		m_velocity *= m_drag;
 
+		
 
 
 		// Base class function call

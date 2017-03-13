@@ -1,7 +1,7 @@
 #include "OpenglGameObject.h"
 #include "SDL_opengl.h"
 #include "Game.h"
-
+#include <cmath>
 
 
 
@@ -107,6 +107,27 @@ void OpenglGameObject::setColor(Engine::Math::Vector3 color)
 {
 	m_color = color;
 }
+
+bool OpenglGameObject::CanCollide()
+{
+	return m_cancollide;
+}
+
+bool OpenglGameObject::IsCollading(OpenglGameObject * object)
+{
+	if(CanCollide())
+	{
+		int difX = m_transforms->GetPosition().x - object->m_transforms->GetPosition().x;
+		int difY = m_transforms->GetPosition().y - object->m_transforms->GetPosition().y;
+		int distance = sqrt(difX*difX + difY*difY);
+
+		int sum_radius = m_radius + object->m_radius;
+		return sum_radius > distance;
+
+	}
+	return false;
+}
+
 
 int OpenglGameObject::wrap(int axis, int min, int max)
 {

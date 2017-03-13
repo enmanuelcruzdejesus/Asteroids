@@ -1,10 +1,11 @@
 
 #include "Game.h"
-#include "iostream"
 #include "glew.h"
 #include "SDL_opengl.h"
 #include "AppConfig.h"
 #include "Entity.h"
+#include "iostream"
+#include "string"
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -124,7 +125,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
@@ -196,9 +197,11 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	std::cout << m_gameObjects.size() << endl;
+	for (std::vector<OpenglGameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
+		CheckCollision(m_gameObjects[i],i);
 	}
 }
 
@@ -329,12 +332,59 @@ void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2
 	{
 		Asteroid* asteroid = new Asteroid(size, pos);
 		m_gameObjects.push_back(asteroid);
-		if (pos == Vector2D::Origin) 
+		/*if (pos == Vector2D::Origin) 
 		{
 			asteroid->ApplayRandomTraslation();
-		}
+		}*/
 	}
 }
+
+void Game::CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position)
+{
+	if (size == Asteroid::AsteroidSize::BIG)
+	{
+		CreateAsteroids(2, Asteroid::AsteroidSize::MEDIUM, position);
+	}
+
+	if (size == Asteroid::AsteroidSize::MEDIUM)
+	{
+		CreateAsteroids(2, Asteroid::AsteroidSize::SMALL, position);
+	}
+}
+
+
+
+void Game::CheckCollision(OpenglGameObject * object, int index)
+{
+	Asteroid* ObjectAsteroid = dynamic_cast<Asteroid*>(object);
+	if (ObjectAsteroid) 
+	{
+		if (m_player->IsCollading(ObjectAsteroid)) 
+		{
+			std::cout << "THE ASTEROID HIT THE SHIP!!" << endl;
+			m_gameObjects.pop_back();
+		}
+		else 
+		{
+			std::cout << "STOP" << std::endl;
+		}
+
+		// Retrieve current size
+		//
+		Asteroid::AsteroidSize::Size currentSize = ObjectAsteroid->GetSize();
+
+		// Remove from scene
+		//
+		
+
+
+		// Create debris
+		//
+		//CreateDebris(currentSize, m_player->GetPosition());
+	}
+	
+}
+
 
 
 

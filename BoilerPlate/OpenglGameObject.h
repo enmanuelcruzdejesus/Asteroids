@@ -19,8 +19,14 @@ public:
 	virtual void Render(int mode);
 	virtual void Clean();	
 	void setColor(Engine::Math::Vector3 color);
+	virtual bool CanCollide();
+	virtual bool IsCollading(OpenglGameObject* object);
+	void SetCanCollide(bool value) { m_cancollide = value;  }
+	Vector2D GetPosition() { return m_transforms->GetPosition(); }
 
 protected:
+	int m_radius;
+	bool m_cancollide;
 	vector<Engine::Math::Vector2D> m_points;
 	RigidBodyComponent* m_physics;
 	TransformationComponent* m_transforms;

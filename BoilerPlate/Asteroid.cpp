@@ -11,6 +11,10 @@ const float ROTATION_SPEED = 120.0f;
 
 Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 {
+	if (size == AsteroidSize::BIG) m_radius = 40.f;
+	if (size == AsteroidSize::MEDIUM) m_radius = 20.f;
+	if (size == AsteroidSize::SMALL) m_radius = 10.f;
+
 	m_size = size;
 	m_transforms = new TransformationComponent();
 	m_transforms->Teleport(pos.x, pos.y);
@@ -77,11 +81,12 @@ void Asteroid::GeneratePoints()
 
 void Asteroid::ApplayRandomImpulse()
 {
-	float x = Engine::Math::RandomInRange<float>(-0.01f, 0.01f);
-	float y = Engine::Math::RandomInRange<float>(-0.01f, 0.01f);
+	int x = Engine::Math::RandomInRange<int>(-150.0f, 150.0f);
+	int y = Engine::Math::RandomInRange<int>(-150.0f, 150.0f);
+	
 
 	m_physics->ApplyForce(
-		Engine::Math::Vector2D(x, y) + static_cast<float>(m_sizeFactor),
+		Engine::Math::Vector2D(x,y) + static_cast<float>(m_sizeFactor),
 		m_transforms->GetAngleIRadians()
 		);
 }
@@ -96,9 +101,9 @@ void Asteroid::ApplayRandomTraslation()
 	int randomX = RandomInRange<int>(minX,maxX);
 	int randomY = RandomInRange<int>(minY, maxY);
 
+
 	m_transforms->Teleport(randomX, randomY);
 
 
-		
 
 }
