@@ -6,6 +6,7 @@ const float ANGLE_OFFSET = 90.0f;
 const float THRUST = 0.01f;
 const float MAX_SPEED = 0.12f;
 const float ROTATION_SPEED = 5.0f;
+const float RESPAWN_TIME = 180;
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 {
@@ -22,6 +23,8 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 
 	m_color = Vector3(1.0f);
 
+	m_updates = 0;
+
 	CalculateMass();
 }
 
@@ -29,6 +32,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, Tr
 	OpenglGameObject(points,physics,transforms,color){
 
 	m_radius = 10;
+	m_updates = 0;
 	this->m_currentIndexPlayer = 0;
 	CalculateMass();
 }
@@ -37,6 +41,7 @@ ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* phys
 	OpenglGameObject(players.at(0),physics,tranforms,color)
 {
 	m_radius = 10;
+	m_updates = 0;
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
 
@@ -53,6 +58,13 @@ void ShipPlayer::setPlayers(vector<vector<Vector2D>> players)
 
 void ShipPlayer::Update(double deltaTime)
 {
+	if (m_updates == RESPAWN_TIME) 
+	{
+		this->SetCanCollide(true);
+		m_color = Vector3(1.0f);
+		m_updates = 0;
+	}
+	
 	float speed = fabs(m_physics->GetSpeed());
 	if (speed > MAX_SPEED)
 	{
@@ -67,6 +79,8 @@ void ShipPlayer::Update(double deltaTime)
 	}
 
 	OpenglGameObject::Update(deltaTime);
+
+	m_updates++;
 }
 
 void ShipPlayer::Render(int mode)
@@ -115,6 +129,16 @@ void ShipPlayer::SwitchPlayer()
 
 	//calculating the mass of the new player
 	CalculateMass();
+}
+
+void ShipPlayer::Respawn()
+{
+	this->SetCanCollide(false);
+	this->m_color = Vector3(1,0,0);
+	this->m_physics->SetVelocity(0);
+	this->m_transforms->Teleport(Vector2D::Origin);
+	this->m_transforms->ResetOrientation();
+	m_updates = 0;
 }
 
 void ShipPlayer::CalculateMass()

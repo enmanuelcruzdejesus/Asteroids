@@ -17,9 +17,11 @@ public :
 	void MoveLeft();
 	void MoveRigth();
 	void SwitchPlayer();
+	void Respawn();
 private:
 	int m_currentIndexPlayer;
 	int m_currentSpeed;
+	int m_updates;
 	vector<vector<Vector2D>> m_players;
 	void CalculateMass();
 };

@@ -208,6 +208,7 @@ void Game::update()
 				Asteroid::AsteroidSize::Size asteroidSize = asteroid->GetSize();
 				m_gameObjects.erase(m_gameObjects.begin()+i);
 				CreateDebris(asteroidSize, Vector2D::Origin);
+				m_player->Respawn();
 				
 			}
 		}
