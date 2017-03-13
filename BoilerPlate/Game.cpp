@@ -4,8 +4,8 @@
 #include "SDL_opengl.h"
 #include "AppConfig.h"
 #include "Entity.h"
-#include "iostream"
 #include "string"
+#include <algorithm>
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -125,7 +125,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
@@ -197,12 +197,13 @@ void Game::handleEvents()
 
 void Game::update()
 {
-	std::cout << m_gameObjects.size() << endl;
-	for (std::vector<OpenglGameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)
+	for (std::list<OpenglGameObject*>::iterator it = m_gameObjects.begin(); it !=m_gameObjects.end(); ++it )
 	{
-		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
-		CheckCollision(m_gameObjects[i],i);
+		(*it)->Update(DESIRED_FRAME_RATE);
+		CheckCollision(*it);
 	}
+	
+	
 }
 
 
@@ -332,10 +333,8 @@ void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2
 	{
 		Asteroid* asteroid = new Asteroid(size, pos);
 		m_gameObjects.push_back(asteroid);
-		/*if (pos == Vector2D::Origin) 
-		{
-			asteroid->ApplayRandomTraslation();
-		}*/
+		asteroid->ApplayRandomTraslation();
+		
 	}
 }
 
@@ -352,38 +351,25 @@ void Game::CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position)
 	}
 }
 
-
-
-void Game::CheckCollision(OpenglGameObject * object, int index)
+void Game::CheckCollision(OpenglGameObject * object)
 {
-	Asteroid* ObjectAsteroid = dynamic_cast<Asteroid*>(object);
-	if (ObjectAsteroid) 
+	Asteroid* asteroid = dynamic_cast<Asteroid*>(object);
+	if (asteroid)
 	{
-		if (m_player->IsCollading(ObjectAsteroid)) 
+		if (m_player->IsCollading(asteroid))
 		{
-			std::cout << "THE ASTEROID HIT THE SHIP!!" << endl;
-			m_gameObjects.pop_back();
+			std::cout << "ASTEROID HITS THE SHIP" << std::endl;
 		}
-		else 
+		else
 		{
-			std::cout << "STOP" << std::endl;
+			std::cout << "STOP" << endl;
 		}
-
-		// Retrieve current size
-		//
-		Asteroid::AsteroidSize::Size currentSize = ObjectAsteroid->GetSize();
-
-		// Remove from scene
-		//
-		
-
-
-		// Create debris
-		//
-		//CreateDebris(currentSize, m_player->GetPosition());
 	}
-	
 }
+
+
+
+
 
 
 

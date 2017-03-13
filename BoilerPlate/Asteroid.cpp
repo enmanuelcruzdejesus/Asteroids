@@ -7,7 +7,7 @@
 const int NUM_POINTS = 16;
 const float MIN_SIZE = 25.0f;
 const float MAX_SIZE = 45.0f;
-const float ROTATION_SPEED = 120.0f;
+const float ROTATION_SPEED =5.00f;
 
 Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 {
@@ -50,7 +50,7 @@ Asteroid::~Asteroid()
 
 void Asteroid::Update(double deltaTime)
 {
-	float angle = m_transforms->GetAngleInDegrees() + ROTATION_SPEED * deltaTime;
+	float angle = m_transforms->GetAngleInDegrees() + ROTATION_SPEED;
 	m_transforms->RotateInDegrees(angle);
 
 	OpenglGameObject::Update(deltaTime);
@@ -81,12 +81,14 @@ void Asteroid::GeneratePoints()
 
 void Asteroid::ApplayRandomImpulse()
 {
-	int x = Engine::Math::RandomInRange<int>(-150.0f, 150.0f);
-	int y = Engine::Math::RandomInRange<int>(-150.0f, 150.0f);
 	
+	int x = Engine::Math::RandomInRange<int>(-0.01f, 0.01f);
+	int y = Engine::Math::RandomInRange<int>(-0.01f, 0.01f);
 
+	//Modify:
+	//APPLAYING A INITIAL ACCELERATION TO THE SHIP
 	m_physics->ApplyForce(
-		Engine::Math::Vector2D(x,y) + static_cast<float>(m_sizeFactor),
+		Engine::Math::Vector2D(0.1),
 		m_transforms->GetAngleIRadians()
 		);
 }
@@ -103,7 +105,4 @@ void Asteroid::ApplayRandomTraslation()
 
 
 	m_transforms->Teleport(randomX, randomY);
-
-
-
 }

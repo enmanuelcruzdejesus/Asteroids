@@ -2,8 +2,9 @@
 #ifndef _Game_
 #define _Game_
 #include "SDL.h"
-#include "iostream"
-#include "vector"
+#include <iostream>
+#include <vector>
+#include  <list>
 #include "Vector2D.h"
 #include "ShipPlayer.h"
 #include "Asteroid.h"
@@ -45,14 +46,14 @@ private:
 	SDL_Window* m_Window;
 	SDL_GLContext m_context;
 	ShipPlayer* m_player;
-	vector<OpenglGameObject*> m_gameObjects;
+	list<OpenglGameObject*> m_gameObjects;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();
 	void CreatePlayers();
 	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size, Vector2D pos);
 	void CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position);
-	void CheckCollision(OpenglGameObject* object, int index);
+	void CheckCollision(OpenglGameObject* object);
 	
 	
 };
