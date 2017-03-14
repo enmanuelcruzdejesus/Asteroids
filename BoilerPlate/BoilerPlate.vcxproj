@@ -171,6 +171,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AppConfig.cpp" />
     <ClCompile Include="Asteroid.cpp" />
@@ -194,6 +195,7 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="App.hpp" />
     <ClInclude Include="AppConfig.h" />
     <ClInclude Include="Asteroid.h" />

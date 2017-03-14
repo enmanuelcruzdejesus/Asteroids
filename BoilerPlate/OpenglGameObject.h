@@ -6,6 +6,7 @@
 #include "vector"
 #include "RigidBodyComponent.h"
 #include "TransformationComponent.h"
+#include "AABB.h"
 using namespace std;
 using namespace Engine::Math;
 class OpenglGameObject : public GameObject
@@ -30,6 +31,7 @@ protected:
 	vector<Engine::Math::Vector2D> m_points;
 	RigidBodyComponent* m_physics;
 	TransformationComponent* m_transforms;
+	AABB* m_collision;
 	Engine::Math::Vector3 m_color;
 	int wrap(int x, int min, int max);
 

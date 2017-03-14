@@ -61,6 +61,8 @@ void OpenglGameObject::Update(double deltaTime)
 	// Set the new position
 	m_transforms->Teleport(x, y);
 
+	//UPDATING COLLISION POINTS;
+	this->m_collision->Update(this->m_transforms->GetPosition().x, this->m_transforms->GetPosition().y);
 
 	this->m_physics->Update(deltaTime);
 
@@ -95,6 +97,16 @@ void OpenglGameObject::Render(int mode)
 		glVertex2f(point.x, point.y);
 	}
 	glEnd();
+
+	//glLoadIdentity();
+	//glBegin(GL_QUADS);
+	//glColor3f(1.0f,0,0); //You can set RGB color for you vertex
+	//glVertex2f(m_collision->getMinX(),m_collision->getMinY());
+	//glVertex2f(m_collision->getMaxX(),m_collision->getMinY());
+
+	//glVertex2f(m_collision->getMinX(), m_collision->getMaxY());
+	//glVertex2f(m_collision->getMaxX(), m_collision->getMaxY());
+	//glEnd();
 }
 
 void OpenglGameObject::Clean()
@@ -116,13 +128,16 @@ bool OpenglGameObject::CanCollide()
 bool OpenglGameObject::IsCollading(OpenglGameObject * object)
 {
 	if(CanCollide())
-	{
+	{/*
 		int difX = m_transforms->GetPosition().x - object->m_transforms->GetPosition().x;
 		int difY = m_transforms->GetPosition().y - object->m_transforms->GetPosition().y;
 		int distance = sqrt(difX*difX + difY*difY);
 
 		int sum_radius = m_radius + object->m_radius;
-		return sum_radius > distance;
+		return sum_radius > distance;*/
+
+
+		return m_collision->isColliding(object->m_collision);
 
 	}
 	return false;

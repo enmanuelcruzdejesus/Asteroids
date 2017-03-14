@@ -31,6 +31,7 @@ Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 		1.0f // No friction
 		);
 
+	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, m_radius,m_radius);
 	GeneratePoints();
 	ApplayRandomImpulse();
 }
