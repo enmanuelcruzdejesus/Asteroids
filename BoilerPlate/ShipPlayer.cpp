@@ -36,7 +36,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, Tr
 	m_radius = 10;
 	m_updates = 0;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(transforms->GetPosition().x, transforms->GetPosition().y, 20, 20);
+	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, 20, 20);
 	CalculateMass();
 }
 
@@ -47,7 +47,7 @@ ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* phys
 	m_updates = 0;
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(tranforms->GetPosition().x, tranforms->GetPosition().y, 20, 20);
+	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, 20, 20);
 	CalculateMass();
 }
 

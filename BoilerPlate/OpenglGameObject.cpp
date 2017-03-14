@@ -98,15 +98,14 @@ void OpenglGameObject::Render(int mode)
 	}
 	glEnd();
 
-	//glLoadIdentity();
-	//glBegin(GL_QUADS);
-	//glColor3f(1.0f,0,0); //You can set RGB color for you vertex
-	//glVertex2f(m_collision->getMinX(),m_collision->getMinY());
-	//glVertex2f(m_collision->getMaxX(),m_collision->getMinY());
-
-	//glVertex2f(m_collision->getMinX(), m_collision->getMaxY());
-	//glVertex2f(m_collision->getMaxX(), m_collision->getMaxY());
-	//glEnd();
+	glLoadIdentity();
+	glBegin(mode);
+	glColor3f(m_color.x, m_color.y, m_color.z);
+	glVertex2f(m_collision->GetX(), m_collision->GetY());
+	glVertex2f(m_collision->GetMaxX(), m_collision->GetY());
+	glVertex2f(m_collision->GetMaxX(), m_collision->GetMaxY());
+	glVertex2f(m_collision->GetX(),m_collision->GetMaxY());
+	glEnd();
 }
 
 void OpenglGameObject::Clean()

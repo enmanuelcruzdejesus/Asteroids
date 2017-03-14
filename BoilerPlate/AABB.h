@@ -7,13 +7,17 @@ public:
 	AABB();
 	AABB(int x, int y, int width, int heigth);
 	bool isColliding(AABB* rhs);
-	int GetX() { return m_x; }
-	int GetY() { return m_y; }
-	int GetWidth() { return m_width; }
-	int GetHeight() { return m_height; }
-	int SetX(int value) { m_x = value;  }
-	int SetY(int value) { m_y = value;  }
-	void Update(int x, int y) { m_x = x; m_y = y; }
+	int GetX();
+	int GetY();
+	int GetWidth();
+	int GetHeight();
+	int GetMinX();
+	int GetMinY();
+	int GetMaxX();
+	int GetMaxY();
+	int SetX(int value);
+	int SetY(int value);
+	void Update(int x, int y);
 private :
 	int m_x;
 	int m_y;
