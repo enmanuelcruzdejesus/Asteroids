@@ -7,6 +7,8 @@ const float THRUST = 0.01f;
 const float MAX_SPEED = 0.12f;
 const float ROTATION_SPEED = 5.0f;
 const float RESPAWN_TIME = 180;
+const int MAX_WIDTH = 45;
+const int MAX_HEIGHT = 52;
 
 ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 {
@@ -23,7 +25,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 
 	m_color = Vector3(1.0f);
 
-	m_collision = new AABB(m_transforms->GetPosition().x,m_transforms->GetPosition().y,20,20);
+	m_collision = new AABB(m_transforms->GetPosition().x,m_transforms->GetPosition().y,MAX_WIDTH,MAX_HEIGHT);
 
 	m_updates = 0;
 
@@ -36,7 +38,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, Tr
 	m_radius = 10;
 	m_updates = 0;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, 20, 20);
+	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, MAX_WIDTH, MAX_HEIGHT);
 	CalculateMass();
 }
 
@@ -47,7 +49,7 @@ ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* phys
 	m_updates = 0;
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, 20, 20);
+	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, MAX_WIDTH, MAX_HEIGHT);
 	CalculateMass();
 }
 

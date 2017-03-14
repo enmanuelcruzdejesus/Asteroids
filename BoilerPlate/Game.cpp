@@ -125,7 +125,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;

@@ -15,8 +15,8 @@ AABB::AABB(int x, int y, int width, int heigth)
 
 bool AABB::isColliding(AABB * rhs)
 {
-	return (m_x < rhs->m_x + rhs->m_width && m_x + m_width > rhs->m_x &&
-		m_y < rhs->m_y + rhs->m_height && m_y + m_height > rhs->m_y);
+	return (GetMinX() < rhs->GetMaxX() && GetMaxX()> rhs->GetMinX() &&
+		GetMinY() < rhs->GetMaxY() && GetMaxY() > rhs->GetMinY());
 }
 
 int AABB::GetX()
@@ -41,12 +41,12 @@ int AABB::GetHeight()
 
 int AABB::GetMinX()
 {
-	return (m_width/2)-m_x;
+	return m_x - (m_width/2);
 }
 
 int AABB::GetMinY()
 {
-	return (m_height/2)-m_y;
+	return m_y - (m_height/2);
 }
 
 int AABB::GetMaxX()

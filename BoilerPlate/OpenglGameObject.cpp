@@ -101,10 +101,10 @@ void OpenglGameObject::Render(int mode)
 	glLoadIdentity();
 	glBegin(mode);
 	glColor3f(m_color.x, m_color.y, m_color.z);
-	glVertex2f(m_collision->GetX(), m_collision->GetY());
-	glVertex2f(m_collision->GetMaxX(), m_collision->GetY());
+	glVertex2f(m_collision->GetMinX(), m_collision->GetMinY());
+	glVertex2f(m_collision->GetMaxX(), m_collision->GetMinY());
 	glVertex2f(m_collision->GetMaxX(), m_collision->GetMaxY());
-	glVertex2f(m_collision->GetX(),m_collision->GetMaxY());
+	glVertex2f(m_collision->GetMinX(),m_collision->GetMaxY());
 	glEnd();
 }
 
