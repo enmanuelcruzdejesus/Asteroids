@@ -16,6 +16,7 @@ public :
 	void MoveUp();
 	void MoveLeft();
 	void MoveRigth();
+	void Shoot();
 	void SwitchPlayer();
 	void Respawn();
 private:

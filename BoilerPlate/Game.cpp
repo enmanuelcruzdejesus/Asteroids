@@ -141,6 +141,11 @@ void Game::quit()
 	m_running = false;
 }
 
+void Game::AddChild(OpenglGameObject * object)
+{
+	this->m_gameObjects.push_back(object);
+}
+
 
 void Game::handleEvents()
 {
@@ -166,6 +171,9 @@ void Game::handleEvents()
 
 				case SDLK_d:
 					m_player->MoveRigth();
+					break;
+				case SDLK_SPACE:
+					m_player->Shoot();
 					break;
 				default:
 					break;

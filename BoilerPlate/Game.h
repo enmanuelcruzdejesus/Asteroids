@@ -33,6 +33,7 @@ public:
 	static Game* Instance();
 	bool running();
 	void quit();
+	void AddChild(OpenglGameObject* object);
 private:
 	Game();
 	static Game* m_instance;

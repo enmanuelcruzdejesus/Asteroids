@@ -1,7 +1,7 @@
 #include "ShipPlayer.h"
 #include "MathUtilities.h"
-
-
+#include "Bullet.h"
+#include "Game.h"
 const float ANGLE_OFFSET = 90.0f;
 const float THRUST = 0.01f;
 const float MAX_SPEED = 0.12f;
@@ -116,6 +116,14 @@ void ShipPlayer::MoveLeft()
 void ShipPlayer::MoveRigth()
 {
 	m_transforms->RotateInDegrees(m_transforms->GetAngleInDegrees() - ROTATION_SPEED);
+}
+
+void ShipPlayer::Shoot()
+{
+	Bullet* bullet = new Bullet(m_transforms->GetPosition(),m_physics->GetVelocity(),m_transforms->GetAngleIRadians());
+	//Adding the bullet to the scene
+	Game::Instance()->AddChild(bullet);
+	
 }
 
 

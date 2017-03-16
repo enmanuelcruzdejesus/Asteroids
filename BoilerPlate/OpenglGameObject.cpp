@@ -61,7 +61,7 @@ void OpenglGameObject::Update(double deltaTime)
 	// Set the new position
 	m_transforms->Teleport(x, y);
 
-	//UPDATING COLLISION POINTS;
+	//Updating collision points;
 	this->m_collision->Update(this->m_transforms->GetPosition().x, this->m_transforms->GetPosition().y);
 
 	this->m_physics->Update(deltaTime);
