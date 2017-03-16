@@ -125,7 +125,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
@@ -142,8 +142,7 @@ void Game::quit()
 }
 
 void Game::AddChild(OpenglGameObject * object)
-{
-	
+{	
 	Bullet* bullet = dynamic_cast<Bullet*>(object);
 	if (bullet) 
 	{
@@ -152,7 +151,6 @@ void Game::AddChild(OpenglGameObject * object)
 	}
 	
 	m_gameObjects.push_back(object);
-	
 }
 
 
@@ -244,6 +242,7 @@ void Game::update()
 	for (unsigned int x = 0; x < m_bullets.size(); x++)
 	{
 		bullet = m_bullets[x];
+		bullet->Update(DESIRED_FRAME_RATE);
 		for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 		{
 			Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
@@ -274,6 +273,10 @@ void Game::render()
 	for each (GameObject*  gObject in m_gameObjects)
 	{
 		gObject->Render(GL_LINE_LOOP);
+	}
+	for each(Bullet* bullet in m_bullets)
+	{
+		bullet->Render(GL_LINE_LOOP);
 	}
 
 	SDL_GL_SwapWindow(m_Window);
