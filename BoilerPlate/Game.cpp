@@ -6,6 +6,7 @@
 #include "Entity.h"
 #include "string"
 #include <algorithm>
+#include "Bullet.h"
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -125,7 +126,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
@@ -209,6 +210,7 @@ void Game::update()
 	{
 		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
 		Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
+		Bullet* bullet = dynamic_cast<Bullet*>(m_gameObjects[i]);
 		if (asteroid) 
 		{
 			if (m_player->IsCollading(asteroid)) 
@@ -219,6 +221,7 @@ void Game::update()
 				m_player->Respawn();
 				
 			}
+
 		}
 	}
 }

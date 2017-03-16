@@ -1,4 +1,6 @@
 #include "Bullet.h"
+#include "MathUtilities.h"
+const float ANGLE_OFFSET = 90.0f;
 const float THURST = 0.1f;
 const float MAX_WIDTH = 15;
 const float MAX_HEIGHT = 15;
@@ -25,7 +27,7 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 
 	//Applaying force 
 	Vector2D force = Vector2D(THURST) + velocity;
-	this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians());
+	this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians() + DegreesToRadians(ANGLE_OFFSET));
 
 	
 }

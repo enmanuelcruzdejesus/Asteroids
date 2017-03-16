@@ -127,15 +127,7 @@ bool OpenglGameObject::CanCollide()
 bool OpenglGameObject::IsCollading(OpenglGameObject * object)
 {
 	if(CanCollide())
-	{/*
-		int difX = m_transforms->GetPosition().x - object->m_transforms->GetPosition().x;
-		int difY = m_transforms->GetPosition().y - object->m_transforms->GetPosition().y;
-		int distance = sqrt(difX*difX + difY*difY);
-
-		int sum_radius = m_radius + object->m_radius;
-		return sum_radius > distance;*/
-
-
+	{
 		return m_collision->isColliding(object->m_collision);
 
 	}
