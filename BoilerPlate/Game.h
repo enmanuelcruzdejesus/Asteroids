@@ -8,7 +8,7 @@
 #include "Vector2D.h"
 #include "ShipPlayer.h"
 #include "Asteroid.h"
-
+#include "Bullet.h"
 using namespace Engine::Math;
 class Game
 {
@@ -48,6 +48,7 @@ private:
 	SDL_GLContext m_context;
 	ShipPlayer* m_player;
 	vector<OpenglGameObject*> m_gameObjects;
+	vector<Bullet*>m_bullets;
 	bool initSDL();
 	bool initGlew();
 	void SetupViewPort();

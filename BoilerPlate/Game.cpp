@@ -6,7 +6,6 @@
 #include "Entity.h"
 #include "string"
 #include <algorithm>
-#include "Bullet.h"
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -144,7 +143,16 @@ void Game::quit()
 
 void Game::AddChild(OpenglGameObject * object)
 {
-	this->m_gameObjects.push_back(object);
+	
+	Bullet* bullet = dynamic_cast<Bullet*>(object);
+	if (bullet) 
+	{
+		this->m_bullets.push_back(bullet);
+		return;
+	}
+	
+	m_gameObjects.push_back(object);
+	
 }
 
 
@@ -173,9 +181,7 @@ void Game::handleEvents()
 				case SDLK_d:
 					m_player->MoveRigth();
 					break;
-				case SDLK_SPACE:
-					m_player->Shoot();
-					break;
+				
 				default:
 					break;
 				}
@@ -188,6 +194,11 @@ void Game::handleEvents()
 				case SDLK_c :
 					m_player->SwitchPlayer();
 					break;
+
+				case SDLK_SPACE:
+					m_player->Shoot();
+					break;
+
 				default:
 					break;
 				}
@@ -206,11 +217,13 @@ void Game::handleEvents()
 
 void Game::update()
 {
+	//Asteroid collision
 	for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
 		Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
-		Bullet* bullet = dynamic_cast<Bullet*>(m_gameObjects[i]);
+		
+		//Checking if Asteroid is collading with the asteroid
 		if (asteroid) 
 		{
 			if (m_player->IsCollading(asteroid)) 
@@ -222,6 +235,32 @@ void Game::update()
 				
 			}
 
+		}		
+	}
+
+
+	//Bullet collision
+	Bullet* bullet;
+	for (unsigned int x = 0; x < m_bullets.size(); x++)
+	{
+		bullet = m_bullets[x];
+		for (unsigned int i = 0; i < m_gameObjects.size(); i++)
+		{
+			Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
+			if (asteroid) 
+			{
+				if (bullet->IsCollading(asteroid)) 
+				{
+					std::cout << "THE BULLET IS COLLADING" << std::endl;
+					Asteroid::AsteroidSize::Size asteroidSize = asteroid->GetSize();
+					//Deleting the asteroid
+					m_gameObjects.erase(m_gameObjects.begin() + i);
+					//Deleting the bullet
+					m_bullets.erase(m_bullets.begin() + x);
+					CreateDebris(asteroidSize, Vector2D::Origin);
+					
+				}
+			}
 		}
 	}
 }
@@ -246,7 +285,6 @@ void Game::clean()
 	std::cout << "cleaning game\n";
 	SDL_GL_DeleteContext(m_context);
 	SDL_DestroyWindow(m_Window);
-	//InputHandler::Instance()->clean();
 	m_gameObjects.clear();
 	SDL_Quit();
 }
