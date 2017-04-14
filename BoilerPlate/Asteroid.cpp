@@ -102,8 +102,8 @@ void Asteroid::ApplayRandomImpulse()
 
 void Asteroid::ApplayRandomTraslation()
 {
-	int maxX = Game::Instance()->getWindowWidth() / 2;
-	int maxY = Game::Instance()->getWindowHeight() / 2;
+	int maxX = Game::Instance()->GetWindowWidth() / 2;
+	int maxY = Game::Instance()->GetWindowHeight() / 2;
 	int minX = -maxX;
 	int minY = -maxY;
 

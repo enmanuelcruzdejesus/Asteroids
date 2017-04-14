@@ -9,6 +9,7 @@
 
 
 #include "Entity.h"
+#include "ShipEnemy.h"
 #include "AppSettings.h"
 
 using namespace Engine::Math;
@@ -40,47 +41,47 @@ std::string Game::getWindowTitle()
 	return m_windowTitle;
 }
 
-int Game::getWindowXPos()
+int Game::GetWindowXPos()
 {
 	return m_windowXPos;
 }
 
-int Game::getWindowYPos()
+int Game::GetWindowYPos()
 {
 	return m_windowYPos;
 }
 
-int Game::getWindowWidth()
+int Game::GetWindowWidth()
 {
 	return m_windowWidth;
 }
 
-int Game::getWindowHeight()
+int Game::GetWindowHeight()
 {
 	return m_windowHeight;
 }
 
-void Game::setWindowTitle(std::string gameTitle)
+void Game::SetWindowTitle(std::string gameTitle)
 {
 	m_windowTitle = gameTitle;
 }
 
-void Game::setWindowXPos(int xpos)
+void Game::SetWindowXPos(int xpos)
 {
 	m_windowXPos = xpos;
 }
 
-void Game::setWindowYPos(int ypos)
+void Game::SetWindowYPos(int ypos)
 {
 	m_windowYPos = ypos;
 }
 
-void Game::setWindowWidth(int width)
+void Game::SetWindowWidth(int width)
 {
 	m_windowWidth = width;
 }
 
-void Game::setWindowHeight(int height)
+void Game::SetWindowHeight(int height)
 {
 	m_windowHeight = height;
 }
@@ -100,11 +101,11 @@ Game * Game::Instance()
 bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 {
 
-	setWindowTitle(title);
-	setWindowXPos(xpos);
-	setWindowYPos(ypos);
-	setWindowWidth(width);
-	setWindowHeight(height);
+	SetWindowTitle(title);
+	SetWindowXPos(xpos);
+	SetWindowYPos(ypos);
+	SetWindowWidth(width);
+	SetWindowHeight(height);
 
 	// Init the external dependencies
 	//
@@ -129,11 +130,16 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(5 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(1 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+
+	//Creating the Enemy Ship
+	ShipEnemy* enemy = new	ShipEnemy();
+	this->m_gameObjects.push_back(enemy);
+
 
 	//Setting amound of rounds
 	AppSettings::Instance()->SetModelLiveIcon(m_player->GetPoints());
-	AppSettings::Instance()->SetLive(3);
+	AppSettings::Instance()->SetLive(5);
 
 	return m_running;
 }
@@ -239,6 +245,7 @@ void Game::Update()
 				m_gameObjects.erase(m_gameObjects.begin()+i);
 				CreateDebris(asteroidSize, Vector2D::Origin);
 				m_player->Respawn();
+				AppSettings::Instance()->ReduceLive();
 				
 			}
 
@@ -260,6 +267,7 @@ void Game::Update()
 				if (bullet->IsCollading(asteroid)) 
 				{
 					std::cout << "THE BULLET IS COLLADING" << std::endl;
+					this->ScoreLogic(asteroid);
 					Asteroid::AsteroidSize::Size asteroidSize = asteroid->GetSize();
 					//Deleting the asteroid
 					m_gameObjects.erase(m_gameObjects.begin() + i);
@@ -293,7 +301,7 @@ void Game::Render()
 		bullet->Render(GL_LINE_LOOP);
 	}
 	AppSettings::Instance()->DrawLife(GL_LINE_LOOP);
-	SDL_GL_SwapWindow(m_Window);
+	SDL_GL_SwapWindow(m_window);
 }
 
 
@@ -301,7 +309,7 @@ void Game::Clean()
 {
 	std::cout << "cleaning game\n";
 	SDL_GL_DeleteContext(m_context);
-	SDL_DestroyWindow(m_Window);
+	SDL_DestroyWindow(m_window);
 	m_gameObjects.clear();
 	SDL_Quit();
 }
@@ -325,17 +333,17 @@ bool Game::InitSDL()
 		SDL_WINDOW_SHOWN |
 		SDL_WINDOW_RESIZABLE;
 
-    this->m_Window = SDL_CreateWindow(m_windowTitle.c_str(), m_windowXPos,m_windowYPos,m_windowWidth,m_windowHeight,flags);
+    this->m_window = SDL_CreateWindow(m_windowTitle.c_str(), m_windowXPos,m_windowYPos,m_windowWidth,m_windowHeight,flags);
 
-	if (!m_Window)
+	if (!m_window)
 	{
 		std::cerr << "Failed to create window!" << std::endl;
 		SDL_Quit();
 		return false;
 	}
 
-	m_context = SDL_GL_CreateContext(m_Window);
-	SDL_GL_MakeCurrent(m_Window, m_context);
+	m_context = SDL_GL_CreateContext(m_window);
+	SDL_GL_MakeCurrent(m_window, m_context);
 
 	// Make double buffer interval synced with vertical scanline refresh
 	SDL_GL_SetSwapInterval(0);
@@ -424,12 +432,34 @@ void Game::CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position)
 	}
 }
 
+void Game::ScoreLogic(OpenglGameObject * object)
+{
+	Asteroid* asteroid = dynamic_cast<Asteroid*>(object);
+	if(asteroid)
+	{
+		if(asteroid->GetSize() == Asteroid::AsteroidSize::BIG)
+		{
+			AppSettings::Instance()->AddScore(15);
+		}
+		else if(asteroid->GetSize() == Asteroid::AsteroidSize::MEDIUM)
+		{
+			AppSettings::Instance()->AddScore(10);
+		}
+		else if (asteroid->GetSize() == Asteroid::AsteroidSize::SMALL) 
+		{
+			AppSettings::Instance()->AddScore(5);
+		}
+	}
+
+}
+
 void Game::PlayerCollision()
 {
 }
 
 void Game::BulletCollision()
 {
+
 }
 
 #pragma endregion

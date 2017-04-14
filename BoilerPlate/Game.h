@@ -15,15 +15,15 @@ public:
 	~Game();
 	static Game* Instance();
 	std::string getWindowTitle();
-	int getWindowXPos();
-	int getWindowYPos();
-	int getWindowWidth();
-	int getWindowHeight();
-	void setWindowTitle(std::string gameTitle);
-	void setWindowXPos(int xpos);
-	void setWindowYPos(int ypos);
-	void setWindowWidth(int width);
-	void setWindowHeight(int height);
+	int GetWindowXPos();
+	int GetWindowYPos();
+	int GetWindowWidth();
+	int GetWindowHeight();
+	void SetWindowTitle(std::string gameTitle);
+	void SetWindowXPos(int xpos);
+	void SetWindowYPos(int ypos);
+	void SetWindowWidth(int width);
+	void SetWindowHeight(int height);
 	//simply set the running variable to true
 	bool Init(const char* title, int xpos, int ypos, int width, int height);
 	void Render();
@@ -43,8 +43,8 @@ private:
 	bool m_running;
 	int m_lastFrameTime;
 	std::string m_windowTitle;
-	SDL_Window* m_Window;
-	SDL_GLContext m_context;
+	SDL_Window* m_window;
+	SDL_GLContext m_context; 
 	ShipPlayer* m_player;
 	vector<OpenglGameObject*> m_gameObjects;
 	vector<Bullet*>m_bullets;
@@ -54,6 +54,7 @@ private:
 	void CreatePlayers();
 	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size, Vector2D pos);
 	void CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position);
+	void ScoreLogic(OpenglGameObject* object);
 	void PlayerCollision();
 	void BulletCollision();
 	

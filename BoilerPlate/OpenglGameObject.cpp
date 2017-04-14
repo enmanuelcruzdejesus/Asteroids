@@ -47,8 +47,8 @@ void OpenglGameObject::Update(double deltaTime)
 {
 	if (m_points.size() <= 0) return;
 	
-	float m_sceneHalfWidth = (Game::Instance()->getWindowWidth() / 2);
-	float m_sceneHalfHeight = (Game::Instance()->getWindowHeight() / 2);
+	float m_sceneHalfWidth = (Game::Instance()->GetWindowWidth() / 2);
+	float m_sceneHalfHeight = (Game::Instance()->GetWindowHeight() / 2);
 
 	if (!m_physics || !m_transforms) return;
 

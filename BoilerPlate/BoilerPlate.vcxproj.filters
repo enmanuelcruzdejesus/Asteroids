@@ -21,44 +21,44 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>Engine\Source files\Helpers</Filter>
     </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Game\Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>Game\Source Files\Entities</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Vector3D.cpp">
       <Filter>Engine\Source files\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="OpenglGameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RigitBodyComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TransportationComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ShipPlayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MathUtilities.cpp">
       <Filter>Engine\Source files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="AABB.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AppSettings.cpp">
       <Filter>Game\Source Files\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="RigitBodyComponent.cpp">
+      <Filter>Engine\Source files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TransportationComponent.cpp">
+      <Filter>Engine\Source files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Engine\Source files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenglGameObject.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipPlayer.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game\Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Engine\Source files\Input &amp; Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipEnemy.cpp">
+      <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,53 +77,53 @@
     <ClInclude Include="IOUtils.h">
       <Filter>Engine\Header files\FileSystem</Filter>
     </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Game\Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Game\Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Drawable2D.h">
       <Filter>Engine\Header files\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Vector3D.h">
       <Filter>Engine\Header files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="OpenglGameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RigidBodyComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformationComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ShipPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MathUtilities.h">
       <Filter>Engine\Header files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Asteroid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AABB.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AppSettings.h">
       <Filter>Game\Header Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyComponent.h">
+      <Filter>Engine\Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformationComponent.h">
+      <Filter>Engine\Header files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Engine\Header files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenglGameObject.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipPlayer.h">
+      <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Engine\Header files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game\Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Engine\Header files\Input &amp; Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipEnemy.h">
+      <Filter>Game\Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,11 +181,29 @@
     <Filter Include="Game\Source Files\Utilities">
       <UniqueIdentifier>{a5a88c92-3fe2-461d-850d-20f3e8603faf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{dffa1751-88e8-474f-9230-bc3865dba202}</UniqueIdentifier>
+    <Filter Include="Engine\Header files\Components">
+      <UniqueIdentifier>{9bf4a91c-05ad-479d-afea-191f1c98bfef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{71743f29-67ed-4990-927b-5d6c286c6699}</UniqueIdentifier>
+    <Filter Include="Engine\Source files\Components">
+      <UniqueIdentifier>{0e052b34-cf0c-4582-83e1-279be5086491}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Input &amp; Textures">
+      <UniqueIdentifier>{f72f8465-0766-43fe-aaa7-b2cb200c7bcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Header files\Core">
+      <UniqueIdentifier>{1a1f3d0e-5c1e-42e0-beb9-0bdad25ac2a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Core">
+      <UniqueIdentifier>{d6be9da4-ad08-45db-9b63-2dd0fe2381c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Header Files\Core">
+      <UniqueIdentifier>{1866e404-2b57-4b16-9d36-691f29fc2188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Source Files\Core">
+      <UniqueIdentifier>{d0937397-a2a9-4b51-ba09-6a359ee97334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Source files\Input &amp; Textures">
+      <UniqueIdentifier>{aff584cc-1583-4775-ba19-489dd4c9c3aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

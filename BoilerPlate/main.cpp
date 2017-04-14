@@ -10,13 +10,14 @@
 // 
 #include "App.hpp"
 #include "Game.h"
+#include "AppSettings.h"
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
 const int FPS = 60;
 const int DELAY_TIME = 1000.0f / FPS;
 
-
+using namespace Asteroids::Utilities;
 
 int main(int argc, char* argv[])
 {
@@ -45,6 +46,13 @@ int main(int argc, char* argv[])
 			if (frameTime < DELAY_TIME) 
 			{
 				SDL_Delay((int)(DELAY_TIME - frameTime));
+			}
+
+			if (AppSettings::Instance()->IsGameOver())
+			{
+				AppSettings::Instance()->SaveScoreData();
+				Game::Instance()->Quit();
+			    std::cout << "GAME OVER!!" << std::endl;
 			}
 
 		}
