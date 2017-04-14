@@ -27,9 +27,6 @@
     <ClCompile Include="MathUtilities.cpp">
       <Filter>Engine\Source files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="AppSettings.cpp">
-      <Filter>Game\Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="RigitBodyComponent.cpp">
       <Filter>Engine\Source files\Components</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     <ClCompile Include="ShipEnemy.cpp">
       <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="AppSettings.cpp">
+      <Filter>Game\Source Files\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -85,9 +85,6 @@
     </ClInclude>
     <ClInclude Include="MathUtilities.h">
       <Filter>Engine\Header files\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="AppSettings.h">
-      <Filter>Game\Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="RigidBodyComponent.h">
       <Filter>Engine\Header files\Components</Filter>
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="ShipEnemy.h">
       <Filter>Game\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="AppSettings.h">
+      <Filter>Game\Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
