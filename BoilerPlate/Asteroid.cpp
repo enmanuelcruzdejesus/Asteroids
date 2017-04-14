@@ -9,6 +9,9 @@ const float MIN_SIZE = 25.0f;
 const float MAX_SIZE = 45.0f;
 const float ROTATION_SPEED =5.00f;
 
+
+
+#pragma region CTOR AND DTOR
 Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 {
 	if (size == AsteroidSize::BIG) m_radius = 40.f;
@@ -49,6 +52,9 @@ Asteroid::~Asteroid()
 {
 }
 
+#pragma endregion
+
+#pragma region METHODS
 void Asteroid::Update(double deltaTime)
 {
 	float angle = m_transforms->GetAngleInDegrees() + ROTATION_SPEED;
@@ -107,3 +113,4 @@ void Asteroid::ApplayRandomTraslation()
 
 	m_transforms->Teleport(randomX, randomY);
 }
+#pragma endregion

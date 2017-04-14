@@ -4,9 +4,15 @@ const float ANGLE_OFFSET = 90.0f;
 const float THURST = 0.1f;
 const float MAX_WIDTH = 15;
 const float MAX_HEIGHT = 15;
+const float MAX_FRAME_LIFE_TIME = 120;
+
+
+#pragma region CTOR AND DTOR
 Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 {
 
+	this->m_isAlive = true;
+    this->m_updates = 0;
 	this->m_transforms = new TransformationComponent();
 	this->m_transforms->Teleport(pos.x,pos.y);
 	this->m_transforms->RotateInRadians(AngleInRadians);
@@ -31,10 +37,16 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 
 	
 }
+#pragma endregion
 
+#pragma region METHODS
 void Bullet::Update(double deltaTime)
-{
+{	 
+	std::cout << m_updates << endl;
+	if (m_updates == MAX_FRAME_LIFE_TIME)
+		m_isAlive = false;
 
+	m_updates++;
 	OpenglGameObject::Update(deltaTime);
 }
 
@@ -48,3 +60,5 @@ void Bullet::ApplayInitialForce()
 	
 
 }
+
+#pragma endregion

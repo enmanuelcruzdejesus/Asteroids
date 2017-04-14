@@ -1,5 +1,8 @@
 #include "AABB.h"
 
+
+#pragma region CTOR AND DTOR
+
 AABB::AABB()
 {
 	m_x = 0;
@@ -13,12 +16,10 @@ AABB::AABB(int x, int y, int width, int heigth)
 {
 }
 
-bool AABB::isColliding(AABB * rhs)
-{
-	return (GetMinX() < rhs->GetMaxX() && GetMaxX()> rhs->GetMinX() &&
-		GetMinY() < rhs->GetMaxY() && GetMaxY() > rhs->GetMinY());
-}
+#pragma endregion
 
+
+#pragma region GETTERS AND SETTERS
 int AABB::GetX()
 {
 	return m_x;
@@ -68,6 +69,15 @@ int AABB::SetY(int value)
 {
 	return m_y = value;
 }
+#pragma endregion
+
+
+#pragma region METHODS
+bool AABB::isColliding(AABB * rhs)
+{
+	return (GetMinX() < rhs->GetMaxX() && GetMaxX()> rhs->GetMinX() &&
+		GetMinY() < rhs->GetMaxY() && GetMaxY() > rhs->GetMinY());
+}
 
 void AABB::Update(int x, int y)
 {
@@ -75,3 +85,4 @@ void AABB::Update(int x, int y)
 	m_y = y;
 }
 
+#pragma endregion

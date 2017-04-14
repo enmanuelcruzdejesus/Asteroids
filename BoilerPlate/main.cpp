@@ -30,15 +30,15 @@ int main(int argc, char* argv[])
 
 	Uint32 frameStart, frameTime;
 
-	if (Game::Instance()->init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT))
+	if (Game::Instance()->Init("Asteroids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT))
 	{ 
-		while (Game::Instance()->running()) 
+		while (Game::Instance()->Running()) 
 		{
 			frameStart = SDL_GetTicks();
 
-			Game::Instance()->handleEvents();
-			Game::Instance()->update();
-			Game::Instance()->render();
+			Game::Instance()->HandleEvents();
+			Game::Instance()->Update();
+			Game::Instance()->Render();
 
 			frameTime = SDL_GetTicks() - frameStart;
 

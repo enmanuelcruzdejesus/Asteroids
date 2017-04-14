@@ -22,13 +22,17 @@ public:
 	void setColor(Engine::Math::Vector3 color);
 	virtual bool CanCollide();
 	virtual bool IsCollading(OpenglGameObject* object);
+	bool IsRespawning() { return m_respawn; }
 	void SetCanCollide(bool value) { m_cancollide = value;  }
 	Vector2D GetPosition() { return m_transforms->GetPosition(); }
+	
 
 protected:
 	int m_radius;
 	bool m_cancollide;
+	bool m_respawn;
 	vector<Engine::Math::Vector2D> m_points;
+	vector<GameObject*> m_components;
 	RigidBodyComponent* m_physics;
 	TransformationComponent* m_transforms;
 	AABB* m_collision;

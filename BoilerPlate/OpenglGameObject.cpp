@@ -4,17 +4,19 @@
 #include <cmath>
 
 
-
+#pragma region CTOR AND DTOR
 OpenglGameObject::OpenglGameObject():
 m_transforms(nullptr),
-m_physics(nullptr)
+m_physics(nullptr),
+m_respawn(false)
 {
 }
 
 OpenglGameObject::OpenglGameObject(vector<Vector2D> points):
 m_points(points),
 m_transforms(nullptr),
-m_physics(nullptr)
+m_physics(nullptr),
+m_respawn(false)
 {
 }
 
@@ -22,7 +24,8 @@ OpenglGameObject::OpenglGameObject(vector<Vector2D> points, RigidBodyComponent* 
 m_points(points),
 m_physics(physic),
 m_transforms(transport),
-m_color(color)
+m_color(color),
+m_respawn(false)
 {
 }
 
@@ -30,6 +33,16 @@ OpenglGameObject::~OpenglGameObject()
 {
 }
 
+#pragma endregion
+
+#pragma region GETTERS AND SETTERS
+void OpenglGameObject::setColor(Engine::Math::Vector3 color)
+{
+	m_color = color;
+}
+#pragma endregion
+
+#pragma region  METHODS
 void OpenglGameObject::Update(double deltaTime)
 {
 	if (m_points.size() <= 0) return;
@@ -114,10 +127,6 @@ void OpenglGameObject::Clean()
 }
 
 
-void OpenglGameObject::setColor(Engine::Math::Vector3 color)
-{
-	m_color = color;
-}
 
 bool OpenglGameObject::CanCollide()
 {
@@ -149,3 +158,4 @@ int OpenglGameObject::wrap(int axis, int min, int max)
 
 	return axis;
 }
+#pragma endregion

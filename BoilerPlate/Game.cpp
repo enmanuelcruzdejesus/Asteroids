@@ -15,7 +15,7 @@ const float DESIRED_FRAME_TIME = 1.0f / DESIRED_FRAME_RATE;
 Game* Game::m_instance = 0;
 
 
-//CTOR
+#pragma region CTOR AND DTOR
 Game::Game()
 {
 	
@@ -23,13 +23,13 @@ Game::Game()
 
 Game::~Game()
 {
-	clean();
+	Clean();
 	delete m_instance;
 	m_instance = nullptr;
 }
+#pragma endregion
 
-//GETTERS AND SETTERS
-
+#pragma region GETTERS AND SETTERS
 std::string Game::getWindowTitle()
 {
 	return m_windowTitle;
@@ -89,11 +89,10 @@ Game * Game::Instance()
 	}
 	return Game::m_instance;
 }
+#pragma endregion
 
-
-
-//*****PUBLIC FUNCTIONS*****/
-bool Game::init(const char * title, int xpos, int ypos, int width, int height)
+#pragma region PUBLIC METHODS
+bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 {
 
 	setWindowTitle(title);
@@ -104,7 +103,7 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 
 	// Init the external dependencies
 	//
-	bool success = initSDL() && initGlew();
+	bool success = InitSDL() && InitGlew();
 	if (!success)
 	{
 		m_running = false;
@@ -125,18 +124,18 @@ bool Game::init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(10, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(5 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 
 	return m_running;
 }
 
-bool Game::running()
+bool Game::Running()
 {
 	return  m_running;
 }
 
-void Game::quit()
+void Game::Quit()
 {
 	m_running = false;
 }
@@ -154,7 +153,7 @@ void Game::AddChild(OpenglGameObject * object)
 }
 
 
-void Game::handleEvents()
+void Game::HandleEvents()
 {
 	SDL_Event event;
 	
@@ -178,7 +177,7 @@ void Game::handleEvents()
 
 				case SDLK_d:
 					m_player->MoveRigth();
-					break;
+					break;			
 				
 				default:
 					break;
@@ -197,6 +196,7 @@ void Game::handleEvents()
 					m_player->Shoot();
 					break;
 
+				
 				default:
 					break;
 				}
@@ -213,15 +213,15 @@ void Game::handleEvents()
 		}
 }
 
-void Game::update()
+void Game::Update()
 {
-	//Asteroid collision
+	//Player collision
 	for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 	{
 		m_gameObjects[i]->Update(DESIRED_FRAME_RATE);
 		Asteroid* asteroid = dynamic_cast<Asteroid*>(m_gameObjects[i]);
 		
-		//Checking if Asteroid is collading with the asteroid
+		//Checking if player is collading with the asteroid
 		if (asteroid) 
 		{
 			if (m_player->IsCollading(asteroid)) 
@@ -261,11 +261,16 @@ void Game::update()
 				}
 			}
 		}
+		//CHECKING IF THE LIVE OF THE BULLET IS OVER
+		if (!bullet->isAlive())
+		{
+			this->m_bullets.erase(m_bullets.begin() + x);
+		}
 	}
 }
 
 
-void Game::render()
+void Game::Render()
 {
 	glClearColor(0.1f, 0.1f, 0.15f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -283,7 +288,7 @@ void Game::render()
 }
 
 
-void Game::clean()
+void Game::Clean()
 {
 	std::cout << "cleaning game\n";
 	SDL_GL_DeleteContext(m_context);
@@ -291,11 +296,10 @@ void Game::clean()
 	m_gameObjects.clear();
 	SDL_Quit();
 }
-\
+#pragma endregion
 
-//******PRIVATE FUNCTIONS******/
-
-bool Game::initSDL()
+#pragma region PRIVATE METHODS
+bool Game::InitSDL()
 {
 	// Initialize SDL's Video subsystem
 	//
@@ -331,7 +335,7 @@ bool Game::initSDL()
 }
 
 
-bool Game::initGlew()
+bool Game::InitGlew()
 {
 	GLenum err = glewInit();
 	if (GLEW_OK != err)
@@ -412,5 +416,12 @@ void Game::CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position)
 	}
 }
 
+void Game::PlayerCollision()
+{
+}
 
+void Game::BulletCollision()
+{
+}
 
+#pragma endregion

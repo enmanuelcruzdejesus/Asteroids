@@ -25,14 +25,14 @@ public:
 	void setWindowWidth(int width);
 	void setWindowHeight(int height);
 	//simply set the running variable to true
-	bool init(const char* title, int xpos, int ypos, int width, int height);
-	void render();
-	void update();
-	void handleEvents();
-	void clean();
+	bool Init(const char* title, int xpos, int ypos, int width, int height);
+	void Render();
+	void Update();
+	void HandleEvents();
+	void Clean();
 	static Game* Instance();
-	bool running();
-	void quit();
+	bool Running();
+	void Quit();
 	void AddChild(OpenglGameObject* object);
 private:
 	Game();
@@ -49,12 +49,14 @@ private:
 	ShipPlayer* m_player;
 	vector<OpenglGameObject*> m_gameObjects;
 	vector<Bullet*>m_bullets;
-	bool initSDL();
-	bool initGlew();
+	bool InitSDL();
+	bool InitGlew();
 	void SetupViewPort();
 	void CreatePlayers();
 	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size, Vector2D pos);
 	void CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position);
+	void PlayerCollision();
+	void BulletCollision();
 	
 };
 #endif

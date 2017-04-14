@@ -109,12 +109,12 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\20155973\Source\Repos\Asteroids\Externals\SDL2-2.0.4\include\SDL2;C:\Users\20155973\Source\Repos\Asteroids\Externals\glew-1.13.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2-2.0.4\include\SDL2;C:\Users\ecruz\Source\Repos\Asteroids\Externals\glew-1.13.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\20155973\Source\Repos\Asteroids\Externals\SDL2-2.0.4\lib\x64;C:\Users\20155973\Source\Repos\Asteroids\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2-2.0.4\lib\x64;C:\Users\ecruz\Source\Repos\Asteroids\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

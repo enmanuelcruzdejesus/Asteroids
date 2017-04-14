@@ -10,6 +10,9 @@ const float RESPAWN_TIME = 180;
 const int MAX_WIDTH = 45;
 const int MAX_HEIGHT = 52;
 
+
+#pragma region CTOR AND DTOR
+
 ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 {
 	m_radius = 10;
@@ -53,21 +56,30 @@ ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* phys
 	CalculateMass();
 }
 
+
 ShipPlayer::~ShipPlayer(){}
 
+#pragma endregion
+
+#pragma region GETTERS AND SETTERS
 void ShipPlayer::setPlayers(vector<vector<Vector2D>> players)
 {
 	this->m_players = players;
 	OpenglGameObject::m_points = this->m_players.at(0);
 }
+#pragma endregion
+
+#pragma region METHODS
 
 void ShipPlayer::Update(double deltaTime)
 {
+	//WHEN RESPAWN TIME IS ELEPSED THEN 
 	if (m_updates == RESPAWN_TIME) 
 	{
 		this->SetCanCollide(true);
 		m_color = Vector3(1.0f);
-		m_updates = 0;
+	    m_updates = 0;
+	    m_respawn = false;
 	}
 	
 	float speed = fabs(m_physics->GetSpeed());
@@ -83,10 +95,10 @@ void ShipPlayer::Update(double deltaTime)
 		m_currentSpeed = fabs(m_physics->GetVelocity().Length());
 	}
 
+	m_updates++;
+
 	OpenglGameObject::Update(deltaTime);
 
-
-	m_updates++;
 }
 
 void ShipPlayer::Render(int mode)
@@ -152,7 +164,9 @@ void ShipPlayer::Respawn()
 	this->m_physics->SetVelocity(0);
 	this->m_transforms->Teleport(Vector2D::Origin);
 	this->m_transforms->ResetOrientation();
-	m_updates = 0;
+    this->m_updates = 0;
+	OpenglGameObject::m_respawn = true;
+	
 }
 
 void ShipPlayer::CalculateMass()
@@ -162,3 +176,4 @@ void ShipPlayer::CalculateMass()
 	this->m_physics->SetMass(m_points.size()/10);
 }
 
+#pragma endregion
