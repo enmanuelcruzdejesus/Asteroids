@@ -55,8 +55,8 @@ void OpenglGameObject::Update(double deltaTime)
 	// Time stepping the position
 	//
 	Engine::Math::Vector2D newPos(
-		m_transforms->GetPosition().x + (m_physics->GetVelocity().x * static_cast<float>(deltaTime)),
-		m_transforms->GetPosition().y + (m_physics->GetVelocity().y * static_cast<float>(deltaTime))
+		m_transforms->GetPosition().GetX() + (m_physics->GetVelocity().GetX() * static_cast<float>(deltaTime)),
+		m_transforms->GetPosition().GetY() + (m_physics->GetVelocity().GetY() * static_cast<float>(deltaTime))
 		);
 
 	// Getting axis limits
@@ -68,14 +68,14 @@ void OpenglGameObject::Update(double deltaTime)
 	float worldMaxY = m_sceneHalfHeight;
 
 	// Wrap!
-	float x = wrap(newPos.x, worldMinX, worldMaxX);
-	float y = wrap(newPos.y, worldMinY, worldMaxY);
+	float x = wrap(newPos.GetX(), worldMinX, worldMaxX);
+	float y = wrap(newPos.GetY(), worldMinY, worldMaxY);
 
 	// Set the new position
 	m_transforms->Teleport(x, y);
 
 	//Updating collision points;
-	this->m_collision->Update(this->m_transforms->GetPosition().x, this->m_transforms->GetPosition().y);
+	this->m_collision->Update(this->m_transforms->GetPosition().GetX(), this->m_transforms->GetPosition().GetY());
 
 	this->m_physics->Update(deltaTime);
 
@@ -92,7 +92,7 @@ void OpenglGameObject::Render(int mode)
 
 	// Translate
 	//
-	glTranslatef(m_transforms->GetPosition().x, m_transforms->GetPosition().y, 0.0f);
+	glTranslatef(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), 0.0f);
 
 	// Rotate
 	//
@@ -107,7 +107,7 @@ void OpenglGameObject::Render(int mode)
 	glBegin(mode);
 	for (auto point : m_points)
 	{
-		glVertex2f(point.x, point.y);
+		glVertex2f(point.GetX(), point.GetY());
 	}
 	glEnd();
 

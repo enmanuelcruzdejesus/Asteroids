@@ -4,7 +4,6 @@
 #include "SDL.h"
 #include <iostream>
 #include <vector>
-#include  <list>
 #include "Vector2D.h"
 #include "ShipPlayer.h"
 #include "Asteroid.h"
@@ -14,6 +13,7 @@ class Game
 {
 public:
 	~Game();
+	static Game* Instance();
 	std::string getWindowTitle();
 	int getWindowXPos();
 	int getWindowYPos();
@@ -30,7 +30,6 @@ public:
 	void Update();
 	void HandleEvents();
 	void Clean();
-	static Game* Instance();
 	bool Running();
 	void Quit();
 	void AddChild(OpenglGameObject* object);

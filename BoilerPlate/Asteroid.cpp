@@ -20,7 +20,7 @@ Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 
 	m_size = size;
 	m_transforms = new TransformationComponent();
-	m_transforms->Teleport(pos.x, pos.y);
+	m_transforms->Teleport(pos.GetX(), pos.GetY());
 	m_color = color;
 
 	m_sizeFactor = static_cast<int>(size) + 1;
@@ -34,7 +34,7 @@ Asteroid::Asteroid(AsteroidSize::Size size, Vector2D  pos, Vector3 color)
 		1.0f // No friction
 		);
 
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, m_radius,m_radius);
+	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), m_radius,m_radius);
 	GeneratePoints();
 	ApplayRandomImpulse();
 }

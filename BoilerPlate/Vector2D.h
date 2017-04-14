@@ -25,6 +25,10 @@ namespace Engine
 			/* =============================================================
 			* PUBLIC FUNCTIONS
 			* ============================================================= */
+			float GetX();
+			float GetY();
+			void  SetX(float value);
+			void  SetY(float value);
 			float Length() const;
 			float SquaredLength() const;
 			float Vector2D::Normalize();
@@ -47,12 +51,13 @@ namespace Engine
 			friend Vector2D operator*(float scaleUnit, const Vector2D& rhs);
 			friend Vector2D operator*(const Vector2D& lhs, float scaleUnit);
 
+		private:
 			/* =============================================================
 			* MEMBERS
 			* ============================================================= */
-			float x;
-			float y;
-			float length;
+			float m_x;
+			float m_y;
+			float m_length;
 		};
 	}
 }

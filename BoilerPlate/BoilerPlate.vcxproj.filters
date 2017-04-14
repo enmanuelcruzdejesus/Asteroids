@@ -27,9 +27,6 @@
     <ClCompile Include="Ship.cpp">
       <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="AppConfig.cpp">
-      <Filter>Game\Source Files\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -60,6 +57,9 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AppSettings.cpp">
+      <Filter>Game\Source Files\Utilities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.hpp" />
@@ -82,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="Ship.h">
       <Filter>Game\Header Files\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="AppConfig.h">
-      <Filter>Game\Header Files\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files</Filter>
@@ -124,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AppSettings.h">
+      <Filter>Game\Header Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

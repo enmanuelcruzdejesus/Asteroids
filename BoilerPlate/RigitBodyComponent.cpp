@@ -41,8 +41,8 @@
 	{
 		if (m_mass > 0)
 		{
-			float x = (force.x / m_mass) * cosf(angleInRadians);
-			float y = (force.y / m_mass) * sinf(angleInRadians);
+			float x = (force.GetX() / m_mass) * cosf(angleInRadians);
+			float y = (force.GetY() / m_mass) * sinf(angleInRadians);
 
 			m_velocity += Vector2D(x, y);
 		}

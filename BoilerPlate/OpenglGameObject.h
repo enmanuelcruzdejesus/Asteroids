@@ -2,8 +2,8 @@
 #ifndef _OpenglGameObject_
 #define _OpenglGameObject_
 #include "GameObject.h"
-#include "iostream"
-#include "vector"
+#include <iostream>
+#include <vector>
 #include "RigidBodyComponent.h"
 #include "TransformationComponent.h"
 #include "AABB.h"
@@ -25,6 +25,7 @@ public:
 	bool IsRespawning() { return m_respawn; }
 	void SetCanCollide(bool value) { m_cancollide = value;  }
 	Vector2D GetPosition() { return m_transforms->GetPosition(); }
+	std::vector<Vector2D> GetPoints() { return m_points; }
 	
 
 protected:

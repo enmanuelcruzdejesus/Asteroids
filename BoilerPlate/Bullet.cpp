@@ -14,7 +14,7 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 	this->m_isAlive = true;
     this->m_updates = 0;
 	this->m_transforms = new TransformationComponent();
-	this->m_transforms->Teleport(pos.x,pos.y);
+	this->m_transforms->Teleport(pos.GetX(),pos.GetY());
 	this->m_transforms->RotateInRadians(AngleInRadians);
 
 
@@ -27,7 +27,7 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 
 	m_color = Vector3(1.0f);
 
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, MAX_WIDTH, MAX_HEIGHT);
+	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), MAX_WIDTH, MAX_HEIGHT);
 
 	GeneratePoints();
 
@@ -52,7 +52,7 @@ void Bullet::Update(double deltaTime)
 
 void Bullet::GeneratePoints()
 {
-	m_points.push_back(Vector2D(m_transforms->GetPosition().x, m_transforms->GetPosition().y));
+	m_points.push_back(Vector2D(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY()));
 }
 
 void Bullet::ApplayInitialForce()

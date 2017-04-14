@@ -10,15 +10,15 @@ namespace Engine
 		Vector2D Vector2D::Origin = Vector2D();
 
 		Vector2D::Vector2D()
-			: x(0.0f)
-			, y(0.0f)
-			, length(0.0f)
+			: m_x(0.0f)
+			, m_y(0.0f)
+			, m_length(0.0f)
 		{}
 
 		Vector2D::Vector2D(float uniform)
-			: x(uniform)
-			, y(uniform)
-			, length(0)
+			: m_x(uniform)
+			, m_y(uniform)
+			, m_length(0)
 		{
 			// Calculate length for the given point
 			//
@@ -26,23 +26,43 @@ namespace Engine
 		}
 
 		Vector2D::Vector2D(float x, float y)
-			: x(x)
-			, y(y)
-			, length(0)
+			: m_x(x)
+			, m_y(y)
+			, m_length(0)
 		{
 			// Calculate length for the given point
 			//
 			Length();
 		}
 
+		float Vector2D::GetX()
+		{
+			return m_x;
+		}
+
+		float Vector2D::GetY()
+		{
+			return m_y;
+		}
+
+		void Vector2D::SetX(float value)
+		{
+			m_x = value;
+		}
+
+		void Vector2D::SetY(float value)
+		{
+			m_y = value;
+		}
+
 		float Vector2D::Length() const
 		{
-			return std::sqrt(x * x + y * y);
+			return std::sqrt(m_x * m_x + m_y * m_y);
 		}
 
 		float Vector2D::SquaredLength() const
 		{
-			return x * x + y * y;
+			return m_x * m_x + m_y * m_y;
 		}
 
 		float Vector2D::Normalize()
@@ -50,11 +70,11 @@ namespace Engine
 			// Calculating the length
 			Length();
 
-			float inverseScale = 1.0f / length;
-			x *= inverseScale;
-			y *= inverseScale;
+			float inverseScale = 1.0f / m_length;
+			m_x *= inverseScale;
+			m_y *= inverseScale;
 
-			return length;
+			return m_length;
 		}
 
 		// operators
@@ -68,40 +88,40 @@ namespace Engine
 				return *this;
 			}
 
-			x = rhs.x;
-			y = rhs.y;
+			m_x = rhs.m_x;
+			m_y = rhs.m_y;
 
 			return *this;
 		}
 
 		Vector2D& Vector2D::operator+=(const Vector2D& rhs)
 		{
-			x = x + rhs.x;
-			y = y + rhs.y;
+			m_x = m_x + rhs.m_x;
+			m_y = m_y + rhs.m_y;
 
 			return *this;
 		}
 
 		Vector2D& Vector2D::operator-=(const Vector2D& rhs)
 		{
-			x = x - rhs.x;
-			y = y - rhs.y;
+			m_x = m_x - rhs.m_x;
+			m_y = m_y - rhs.m_y;
 
 			return *this;
 		}
 
 		Vector2D& Vector2D::operator*=(const Vector2D& rhs)
 		{
-			x = x * rhs.x;
-			y = y * rhs.y;
+			m_x = m_x * rhs.m_x;
+			m_y = m_y * rhs.m_y;
 
 			return *this;
 		}
 
 		Vector2D& Vector2D::operator/=(const Vector2D& rhs)
 		{
-			x = x / rhs.x;
-			y = y / rhs.y;
+			m_x = m_x / rhs.m_x;
+			m_y = m_y / rhs.m_y;
 
 			return *this;
 		}
@@ -110,8 +130,8 @@ namespace Engine
 		{
 			Vector2D sum;
 
-			sum.x = x + rhs.x;
-			sum.y = y + rhs.y;
+			sum.m_x = m_x + rhs.m_x;
+			sum.m_y = m_y + rhs.m_y;
 
 			return sum;
 		}
@@ -119,23 +139,23 @@ namespace Engine
 		Vector2D Vector2D::operator-(const Vector2D& rhs) const
 		{
 			Vector2D sub;
-			sub.x = x - rhs.x;
-			sub.y = y - rhs.y;
+			sub.m_x = m_x - rhs.m_x;
+			sub.m_y = m_y - rhs.m_y;
 
 			return sub;
 		}
 
 		Vector2D Vector2D::operator-() const
 		{
-			return Vector2D(-x, -y);
+			return Vector2D(-m_x, -m_y);
 		}
 
 		Vector2D Vector2D::operator*(const Vector2D& rhs) const
 		{
 			Vector2D scaled;
 
-			scaled.y = y * rhs.y;
-			scaled.x = x * rhs.x;
+			scaled.m_y = m_y * rhs.m_y;
+			scaled.m_x = m_x * rhs.m_x;
 
 			return scaled;
 		}
@@ -144,8 +164,8 @@ namespace Engine
 		{
 			Vector2D inverseScaled;
 
-			inverseScaled.x = x / rhs.x;
-			inverseScaled.y = y / rhs.y;
+			inverseScaled.m_x = m_x / rhs.m_x;
+			inverseScaled.m_y = m_y / rhs.m_y;
 
 			return inverseScaled;
 		}
@@ -153,23 +173,23 @@ namespace Engine
 		bool Vector2D::operator==(const Vector2D& rhs) const
 		{
 			return
-				x == rhs.x &&
-				y == rhs.y;
+				m_x == rhs.m_x &&
+				m_y == rhs.m_y;
 		}
 
 		bool Vector2D::operator!=(const Vector2D& rhs) const
 		{
 			return
-				x != rhs.x ||
-				y != rhs.y;
+				m_x != rhs.m_x ||
+				m_y != rhs.m_y;
 		}
 
 		// friend functions
 		Vector2D operator*(float scaleUnit, const Vector2D& rhs)
 		{
 			Vector2D scaled;
-			scaled.x = scaleUnit * rhs.x;
-			scaled.y = scaleUnit * rhs.y;
+			scaled.m_x = scaleUnit * rhs.m_x;
+			scaled.m_y = scaleUnit * rhs.m_y;
 
 			return scaled;
 		}
@@ -177,8 +197,8 @@ namespace Engine
 		Vector2D operator*(const Vector2D& lhs, float scaleUnit)
 		{
 			Vector2D scaled;
-			scaled.x = scaleUnit * lhs.x;
-			scaled.y = scaleUnit * lhs.y;
+			scaled.m_x = scaleUnit * lhs.m_x;
+			scaled.m_y = scaleUnit * lhs.m_y;
 
 			return scaled;
 		}

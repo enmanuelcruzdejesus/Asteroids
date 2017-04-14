@@ -1,11 +1,16 @@
 
 #include "Game.h"
+#include <string>
+#include <algorithm>
+
+//OPENGL 
 #include "glew.h"
 #include "SDL_opengl.h"
-#include "AppConfig.h"
+
+
 #include "Entity.h"
-#include "string"
-#include <algorithm>
+#include "AppSettings.h"
+
 using namespace Engine::Math;
 using namespace Asteroids::Entities;
 using namespace Asteroids::Utilities;
@@ -126,6 +131,9 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 	//Creating Asteroids
 	CreateAsteroids(5 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
+	//Setting amound of rounds
+	AppSettings::Instance()->SetModelLiveIcon(m_player->GetPoints());
+	AppSettings::Instance()->SetLive(3);
 
 	return m_running;
 }
@@ -190,6 +198,7 @@ void Game::HandleEvents()
 				{
 				case SDLK_c :
 					m_player->SwitchPlayer();
+					AppSettings::Instance()->SetModelLiveIcon(m_player->GetPoints());
 					break;
 
 				case SDLK_SPACE:
@@ -283,7 +292,7 @@ void Game::Render()
 	{
 		bullet->Render(GL_LINE_LOOP);
 	}
-
+	AppSettings::Instance()->DrawLife(GL_LINE_LOOP);
 	SDL_GL_SwapWindow(m_Window);
 }
 
@@ -375,8 +384,8 @@ void Game::SetupViewPort()
 
 void Game::CreatePlayers()
 {
-	AppConfig* app = new AppConfig();
-	auto dataplayers = app->Initialize();
+	
+	auto dataplayers = AppSettings::Instance()->Initialize();
 
 	//Setting up the ship physics
 	RigidBodyComponent* ship_Physics = new RigidBodyComponent(
@@ -388,7 +397,6 @@ void Game::CreatePlayers()
 
     m_player = new ShipPlayer(dataplayers, ship_Physics, new TransformationComponent(), Vector3(1.0f));
 	this->m_gameObjects.push_back(m_player);
-	delete app;
 }
 
 void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2D pos)

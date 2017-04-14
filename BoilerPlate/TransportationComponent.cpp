@@ -20,8 +20,8 @@
 
 	void TransformationComponent::Teleport(float x, float y)
 	{
-		m_position.x = x;
-		m_position.y = y;
+		m_position.SetX(x);
+		m_position.SetY(y);
 	}
 
 	void TransformationComponent::Teleport(Vector2D newPosition)

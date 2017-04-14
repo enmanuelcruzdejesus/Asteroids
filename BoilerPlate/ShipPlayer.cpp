@@ -1,3 +1,4 @@
+
 #include "ShipPlayer.h"
 #include "MathUtilities.h"
 #include "Bullet.h"
@@ -28,7 +29,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points):OpenglGameObject(points)
 
 	m_color = Vector3(1.0f);
 
-	m_collision = new AABB(m_transforms->GetPosition().x,m_transforms->GetPosition().y,MAX_WIDTH,MAX_HEIGHT);
+	m_collision = new AABB(m_transforms->GetPosition().GetX(),m_transforms->GetPosition().GetY(),MAX_WIDTH,MAX_HEIGHT);
 
 	m_updates = 0;
 
@@ -41,7 +42,7 @@ ShipPlayer::ShipPlayer(vector<Vector2D> points, RigidBodyComponent * physics, Tr
 	m_radius = 10;
 	m_updates = 0;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, MAX_WIDTH, MAX_HEIGHT);
+	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), MAX_WIDTH, MAX_HEIGHT);
 	CalculateMass();
 }
 
@@ -52,7 +53,7 @@ ShipPlayer::ShipPlayer(vector<vector<Vector2D>>players, RigidBodyComponent* phys
 	m_updates = 0;
 	this->m_players = players;
 	this->m_currentIndexPlayer = 0;
-	m_collision = new AABB(m_transforms->GetPosition().x, m_transforms->GetPosition().y, MAX_WIDTH, MAX_HEIGHT);
+	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), MAX_WIDTH, MAX_HEIGHT);
 	CalculateMass();
 }
 
@@ -87,8 +88,8 @@ void ShipPlayer::Update(double deltaTime)
 	{
 		m_physics->SetVelocity(
 			Engine::Math::Vector2D(
-				(m_physics->GetVelocity().x / speed) * MAX_SPEED,
-				(m_physics->GetVelocity().y / speed) * MAX_SPEED
+				(m_physics->GetVelocity().GetX() / speed) * MAX_SPEED,
+				(m_physics->GetVelocity().GetY() / speed) * MAX_SPEED
 				)
 			);
 
