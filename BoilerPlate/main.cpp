@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	delete Game::Instance();
+	Game::Instance()->Destroy();
 
 	
 	system("pause");

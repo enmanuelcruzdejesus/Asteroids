@@ -33,6 +33,7 @@ public:
 	void Clean();
 	bool Running();
 	void Quit();
+	void Destroy();
 	void AddChild(OpenglGameObject* object);
 private:
 	Game();

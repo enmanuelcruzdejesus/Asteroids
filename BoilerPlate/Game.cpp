@@ -28,9 +28,7 @@ Game::Game()
 
 Game::~Game()
 {
-	Clean();
-	delete m_instance;
-	m_instance = nullptr;
+	
 }
 #pragma endregion
 
@@ -129,7 +127,7 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(1 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(8, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 	//Creating the Enemy Ship
 	 this->m_enemy = new ShipEnemy();
@@ -152,6 +150,13 @@ bool Game::Running()
 void Game::Quit()
 {
 	m_running = false;
+}
+
+void Game::Destroy()
+{
+	Clean();
+	delete m_instance;
+	m_instance = nullptr;
 }
 
 void Game::AddChild(OpenglGameObject * object)
@@ -307,11 +312,12 @@ void Game::Render()
 
 void Game::Clean()
 {
-	std::cout << "cleaning game\n";
+	
 	SDL_GL_DeleteContext(m_context);
 	SDL_DestroyWindow(m_window);
 	m_gameObjects.clear();
 	SDL_Quit();
+
 }
 #pragma endregion
 
