@@ -1,11 +1,12 @@
 #pragma once
-#include "Constants.h"
-
 #include <random>
 namespace Engine 
 {
 	namespace Math 
 	{
+
+		const float PI = 3.141592653f;
+
 		float DegreesToRadians(float angleInRadians);
 		float RadiansToDegrees(float angleInDegrees);
 

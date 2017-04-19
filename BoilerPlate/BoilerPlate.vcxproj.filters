@@ -107,9 +107,6 @@
     <ClInclude Include="ShipPlayer.h">
       <Filter>Game\Header Files\Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Constants.h">
-      <Filter>Engine\Header files\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game\Header Files\Core</Filter>
     </ClInclude>

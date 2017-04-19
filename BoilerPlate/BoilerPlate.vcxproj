@@ -200,7 +200,6 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="AppSettings.h" />
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Constants.h" />
     <ClInclude Include="MathUtilities.h" />
     <ClInclude Include="OpenglGameObject.h" />
     <ClInclude Include="DirectoryUtils.h" />

@@ -1,22 +1,46 @@
 #include "ShipEnemy.h"
+#include <cmath>
+#include "MathUtilities.h"
 
+const float THURST = 0.01f;
+const float CONSTANT_FORCE(THURST);
 
 
 ShipEnemy::ShipEnemy()
 {
 	m_radius = 10;
+
+	//INITIAL POS
 	m_transforms = new TransformationComponent(Vector2D(-550,300),0);
+
+	// Physics
+	//
+	m_physics = new RigidBodyComponent(
+		Vector2D(0.0f), // No gravity
+		m_transforms->GetPosition(),
+		1.0f,
+		1.0f // No friction
+		);
+
+
 	m_color = Vector3(1.0f);
 	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), m_radius, m_radius);
 	GeneratePoints();
-	this->m_countDistanceX = 0;
-	this->m_countDistanceY = 0;
+
+
+	//Applaying Force
+	this->m_physics->ApplyForce(CONSTANT_FORCE, m_transforms->GetAngleIRadians());
+
 }
 
 
 void ShipEnemy::Update(double deltaTime)
 {
 	
+	float y = sin(DegreesToRadians(m_transforms->GetPosition().GetX())) * 100;
+	this->m_transforms->Teleport(m_transforms->GetPosition().GetX(), y);
+
+
 	OpenglGameObject::Update(deltaTime);
 }
 

@@ -36,8 +36,8 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 
 	//Applaying force 
 	Vector2D force = Vector2D(THURST) + velocity;
-	this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians() + DegreesToRadians(ANGLE_OFFSET));
-
+    this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians() + DegreesToRadians(ANGLE_OFFSET));
+	
 	
 }
 #pragma endregion
