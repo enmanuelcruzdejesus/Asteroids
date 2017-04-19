@@ -6,6 +6,7 @@
 #include <vector>
 #include "Vector2D.h"
 #include "ShipPlayer.h"
+#include "ShipEnemy.h"
 #include "Asteroid.h"
 #include "Bullet.h"
 using namespace Engine::Math;
@@ -48,6 +49,7 @@ private:
 	ShipPlayer* m_player;
 	vector<OpenglGameObject*> m_gameObjects;
 	vector<Bullet*>m_bullets;
+	ShipEnemy* m_enemy;
 	bool InitSDL();
 	bool InitGlew();
 	void SetupViewPort();

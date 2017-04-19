@@ -7,6 +7,7 @@ class Bullet : public OpenglGameObject
 public:
 	Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians);
 	void Update(double deltaTime) override;
+	void Render(int mode)override;
 	bool isAlive() { return m_isAlive; };
 private:
 	bool m_isAlive;

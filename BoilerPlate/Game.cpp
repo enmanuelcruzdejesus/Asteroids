@@ -9,7 +9,6 @@
 
 
 #include "Entity.h"
-#include "ShipEnemy.h"
 #include "AppSettings.h"
 
 using namespace Engine::Math;
@@ -133,13 +132,14 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 	CreateAsteroids(1 , Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 	//Creating the Enemy Ship
-	ShipEnemy* enemy = new	ShipEnemy();
-	this->m_gameObjects.push_back(enemy);
+	 this->m_enemy = new ShipEnemy();
+	this->m_gameObjects.push_back(m_enemy);
 
 
 	//Setting amound of rounds
 	AppSettings::Instance()->SetModelLiveIcon(m_player->GetPoints());
-	AppSettings::Instance()->SetLive(5);
+	AppSettings::Instance()->SetLive(3);
+
 
 	return m_running;
 }
@@ -298,7 +298,7 @@ void Game::Render()
 	}
 	for each(Bullet* bullet in m_bullets)
 	{
-		bullet->Render(GL_LINE_LOOP);
+		bullet->Render(GL_POINTS);
 	}
 	AppSettings::Instance()->DrawLife(GL_LINE_LOOP);
 	SDL_GL_SwapWindow(m_window);
@@ -409,7 +409,6 @@ void Game::CreatePlayers()
 
 void Game::CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size,Vector2D pos)
 {
-
 	for (int i = 0; i <  amount; i++)
 	{
 		Asteroid* asteroid = new Asteroid(size, pos);

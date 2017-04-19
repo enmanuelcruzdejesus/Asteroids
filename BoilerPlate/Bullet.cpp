@@ -1,4 +1,7 @@
 #include "Bullet.h"
+
+#include "SDL_opengl.h"
+
 #include "MathUtilities.h"
 const float ANGLE_OFFSET = 90.0f;
 const float THURST = 0.1f;
@@ -46,8 +49,23 @@ void Bullet::Update(double deltaTime)
 	if (m_updates == MAX_FRAME_LIFE_TIME)
 		m_isAlive = false;
 
+
 	m_updates++;
 	OpenglGameObject::Update(deltaTime);
+}
+
+void Bullet::Render(int mode)
+{
+	glLoadIdentity();
+	glBegin(mode);
+	glColor3f(m_color.x, m_color.y, m_color.z);
+	glVertex2f(m_collision->GetMinX(), m_collision->GetMinY());
+	glVertex2f(m_collision->GetMaxX(), m_collision->GetMinY());
+	glVertex2f(m_collision->GetMaxX(), m_collision->GetMaxY());
+	glVertex2f(m_collision->GetMinX(),m_collision->GetMaxY());
+	glEnd();
+
+	OpenglGameObject::Render(mode);
 }
 
 void Bullet::GeneratePoints()

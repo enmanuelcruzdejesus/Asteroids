@@ -17,9 +17,9 @@ namespace Asteroids
 	namespace Utilities
 	{
 		const int MIN_LIVE = 1;
-		const int MAX_LIVE = 5;
+		const int MAX_LIVE = 10;
 		const Vector2D DEFAULT_SHIPS_POS(520, 250);
-		const Vector2D SPACE_BETWEEN_SHIPS(-80, 0);
+		const Vector2D SPACE_BETWEEN_ELEMENTS(-80, 0);
 
 
 		AppSettings* AppSettings::m_instance = 0;
@@ -114,7 +114,7 @@ namespace Asteroids
 				}
 				glEnd();
 
-				m_modelLiveIconPos += SPACE_BETWEEN_SHIPS;
+				m_modelLiveIconPos += SPACE_BETWEEN_ELEMENTS;
 			}
 
 			m_modelLiveIconPos = Vector2D(DEFAULT_SHIPS_POS);

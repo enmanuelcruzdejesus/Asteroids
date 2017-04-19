@@ -109,13 +109,13 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x86\SDL2.dll" "$(TargetDir)SDL2
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2_image-2.0.1\include;C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2-2.0.4\include\SDL2;C:\Users\ecruz\Source\Repos\Asteroids\Externals\glew-1.13.0\include\GL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Externals\glew-1.13.0\include\GL;..\Externals\SDL2-2.0.4\include\SDL2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2_image-2.0.1\lib\x64;C:\Users\ecruz\Source\Repos\Asteroids\Externals\SDL2-2.0.4\lib\x64;C:\Users\ecruz\Source\Repos\Asteroids\Externals\glew-1.13.0\lib\Release\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\Externals\glew-1.13.0\glew-1.13.0\lib\Release\x64;..\Externals\SDL2-2.0.4\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;SDL2main.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy /Y "$(SolutionDir)\Externals\glew-1.13.0\bin\Release\x64\glew32.dll" "$(TargetDir)glew32.dll"
@@ -189,7 +189,6 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClCompile Include="ShipPlayer.cpp" />
     <ClCompile Include="stb_image.c" />
     <ClCompile Include="StringHelper.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TransportationComponent.cpp" />
     <ClCompile Include="Vector2D.cpp" />
@@ -214,7 +213,6 @@ copy /Y "$(SolutionDir)\Externals\SDL2-2.0.4\lib\x64\SDL2.dll" "$(TargetDir)SDL2
     <ClInclude Include="ShipEnemy.h" />
     <ClInclude Include="ShipPlayer.h" />
     <ClInclude Include="StringHelper.h" />
-    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TimeManager.hpp" />
     <ClInclude Include="TransformationComponent.h" />
     <ClInclude Include="Vector2D.h" />

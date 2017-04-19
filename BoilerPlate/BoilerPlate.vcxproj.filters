@@ -51,9 +51,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Game\Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\Source files\Input &amp; Textures</Filter>
-    </ClCompile>
     <ClCompile Include="ShipEnemy.cpp">
       <Filter>Game\Source Files\Entities</Filter>
     </ClCompile>
@@ -115,9 +112,6 @@
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game\Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Engine\Header files\Input &amp; Textures</Filter>
     </ClInclude>
     <ClInclude Include="ShipEnemy.h">
       <Filter>Game\Header Files\Entities</Filter>
