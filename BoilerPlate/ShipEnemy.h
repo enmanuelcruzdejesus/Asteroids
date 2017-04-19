@@ -11,7 +11,8 @@ public:
 	void Clean();
 	void Shoot();
 private:
-	void GeneratePoints();
-	
+	int m_countDistanceX;
+	int m_countDistanceY;
+	void GeneratePoints();	
 };
 #endif

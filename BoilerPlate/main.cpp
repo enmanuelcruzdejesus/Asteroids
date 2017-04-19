@@ -11,6 +11,7 @@
 #include "App.hpp"
 #include "Game.h"
 #include "AppSettings.h"
+#include "DirectoryUtils.h"
 
 const int WIDTH = 1136;
 const int HEIGHT = 640;
@@ -59,5 +60,9 @@ int main(int argc, char* argv[])
 	}
 
 	delete Game::Instance();
+
+	
+	
+	system("pause");
 	return 0;
 }

@@ -77,7 +77,6 @@ namespace Asteroids
 
 		}
 
-
 		bool AppSettings::IsGameOver()
 		{
 			return m_isgameOver;
@@ -146,7 +145,7 @@ namespace Asteroids
 
 		vector<vector<Vector2D>> AppSettings::Initialize()
 		{
-			string local_dir = DirectoryUtils::GetExeFileName();
+			string local_dir = DirectoryUtils::SourcePath();
 			string folder = "Models";
 			string path = DirectoryUtils::PathCombine(local_dir, folder);
 

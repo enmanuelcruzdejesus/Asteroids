@@ -1,19 +1,22 @@
 #include "ShipEnemy.h"
 
 
+
 ShipEnemy::ShipEnemy()
 {
 	m_radius = 10;
-	m_transforms = new TransformationComponent();
+	m_transforms = new TransformationComponent(Vector2D(-550,300),0);
 	m_color = Vector3(1.0f);
 	m_collision = new AABB(m_transforms->GetPosition().GetX(), m_transforms->GetPosition().GetY(), m_radius, m_radius);
 	GeneratePoints();
+	this->m_countDistanceX = 0;
+	this->m_countDistanceY = 0;
 }
-
 
 
 void ShipEnemy::Update(double deltaTime)
 {
+	
 	OpenglGameObject::Update(deltaTime);
 }
 

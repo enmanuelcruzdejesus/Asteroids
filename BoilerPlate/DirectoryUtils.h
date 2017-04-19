@@ -20,10 +20,10 @@ namespace Engine
 			DirectoryUtils(string path);
 			static string GetExeFileName();
 			static string ExePath();
+			static string SourcePath();
 			static string PathCombine(string folder,string file);
 			vector<string> GetDir();
-			
-			
+						
 
 		private:
 			string m_path;

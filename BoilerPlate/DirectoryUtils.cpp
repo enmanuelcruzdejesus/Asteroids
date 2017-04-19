@@ -26,6 +26,14 @@ namespace Engine
 			return full_dir.substr(0, pos);
 		}
 
+		string DirectoryUtils::SourcePath()
+		{
+			string full_dir = Engine::FileSystem::DirectoryUtils::ExePath();
+			string::size_type pos = full_dir.find_last_of("\\/");
+			return full_dir.substr(0,pos);
+
+		}
+
 		string DirectoryUtils::PathCombine(string folder, string file)
 		{
 			std::stringstream path;
