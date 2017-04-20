@@ -49,6 +49,11 @@ namespace Asteroids
 			return m_live;
 		}
 
+		int AppSettings::GetScores()
+		{
+			return m_scores;
+		}
+
 
 		void AppSettings::SetLive(int live)
 		{

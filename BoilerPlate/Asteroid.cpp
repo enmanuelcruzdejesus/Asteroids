@@ -93,7 +93,7 @@ void Asteroid::ApplayRandomImpulse()
 	int y = Engine::Math::RandomInRange<int>(-0.01f, 0.01f);
 
 	//Modify:
-	//APPLAYING A INITIAL ACCELERATION TO THE SHIP
+	//APPLAYING A INITIAL ACCELERATION TO THE ASTEROID
 	m_physics->ApplyForce(
 		Engine::Math::Vector2D(0.1),
 		m_transforms->GetAngleIRadians()

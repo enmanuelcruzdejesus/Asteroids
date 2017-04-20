@@ -16,6 +16,7 @@ namespace Asteroids
 		public:
 			static AppSettings* Instance();
 			int GetLive();
+			int GetScores();
 			void SetLive(int live);
 			void SetModelLiveIcon(vector<Vector2D> model);
 			void ReduceLive();

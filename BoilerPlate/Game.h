@@ -44,6 +44,7 @@ private:
 	int m_windowYPos;
 	bool m_running;
 	int m_lastFrameTime;
+	int m_numberOfAsteroids;
 	std::string m_windowTitle;
 	SDL_Window* m_window;
 	SDL_GLContext m_context; 
@@ -58,8 +59,6 @@ private:
 	void CreateAsteroids(int amount, Asteroid::AsteroidSize::Size size, Vector2D pos);
 	void CreateDebris(Asteroid::AsteroidSize::Size size, Vector2D position);
 	void ScoreLogic(OpenglGameObject* object);
-	void PlayerCollision();
-	void BulletCollision();
 	
 };
 #endif

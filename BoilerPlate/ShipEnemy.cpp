@@ -2,7 +2,7 @@
 #include <cmath>
 #include "MathUtilities.h"
 
-const float THURST = 0.01f;
+const float THURST = 0.1f;
 const float CONSTANT_FORCE(THURST);
 
 
@@ -19,7 +19,7 @@ ShipEnemy::ShipEnemy()
 		Vector2D(0.0f), // No gravity
 		m_transforms->GetPosition(),
 		1.0f,
-		1.0f // No friction
+		1.0 // No friction
 		);
 
 
@@ -36,10 +36,10 @@ ShipEnemy::ShipEnemy()
 
 void ShipEnemy::Update(double deltaTime)
 {
-	
-	float y = sin(DegreesToRadians(m_transforms->GetPosition().GetX())) * 100;
+ 
+	float y = sin(DegreesToRadians(m_transforms->GetPosition().GetX())) * 100 ;
 	this->m_transforms->Teleport(m_transforms->GetPosition().GetX(), y);
-
+	std::cout << "x = " << m_transforms->GetPosition().GetX() << " y = " <<m_transforms->GetPosition().GetY()<<endl;
 
 	OpenglGameObject::Update(deltaTime);
 }

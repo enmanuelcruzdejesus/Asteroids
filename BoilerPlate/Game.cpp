@@ -127,7 +127,8 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 	CreatePlayers();
 
 	//Creating Asteroids
-	CreateAsteroids(8, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	this->m_numberOfAsteroids = 2;
+	CreateAsteroids(2, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 	//Creating the Enemy Ship
 	 this->m_enemy = new ShipEnemy();
@@ -235,6 +236,13 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+	//Checking it there is asteroids 
+	if (m_gameObjects.size() - 2 == 0) 
+	{
+		this->m_numberOfAsteroids += 2;
+		CreateAsteroids(m_numberOfAsteroids, Asteroid::AsteroidSize::BIG, Vector2D::Origin);
+	}
+
 	//Player collision
 	for (unsigned int i = 0; i < m_gameObjects.size(); i++)
 	{
@@ -458,13 +466,5 @@ void Game::ScoreLogic(OpenglGameObject * object)
 
 }
 
-void Game::PlayerCollision()
-{
-}
-
-void Game::BulletCollision()
-{
-
-}
 
 #pragma endregion

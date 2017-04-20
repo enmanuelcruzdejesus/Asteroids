@@ -53,6 +53,7 @@ int main(int argc, char* argv[])
 			{
 				AppSettings::Instance()->SaveScoreData();
 				Game::Instance()->Quit();
+				cout << "YOUR SCORE IS " <<AppSettings::Instance()->GetScores()<<endl;
 			    std::cout << "GAME OVER!!" << std::endl;
 			}
 
