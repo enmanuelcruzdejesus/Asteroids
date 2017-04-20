@@ -19,7 +19,9 @@ public:
 	int GetWindowXPos();
 	int GetWindowYPos();
 	int GetWindowWidth();
+	int GetWindowHalfWidth();
 	int GetWindowHeight();
+	int GetWindowHalfHeight();
 	void SetWindowTitle(std::string gameTitle);
 	void SetWindowXPos(int xpos);
 	void SetWindowYPos(int ypos);

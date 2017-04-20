@@ -53,9 +53,19 @@ int Game::GetWindowWidth()
 	return m_windowWidth;
 }
 
+int Game::GetWindowHalfWidth()
+{
+	return GetWindowWidth() / 2;
+}
+
 int Game::GetWindowHeight()
 {
 	return m_windowHeight;
+}
+
+int Game::GetWindowHalfHeight()
+{
+	return GetWindowHeight() / 2;
 }
 
 void Game::SetWindowTitle(std::string gameTitle)
@@ -128,10 +138,10 @@ bool Game::Init(const char * title, int xpos, int ypos, int width, int height)
 
 	//Creating Asteroids
 	this->m_numberOfAsteroids = 2;
-	CreateAsteroids(2, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
+	CreateAsteroids(1, Asteroid::AsteroidSize::BIG,Vector2D::Origin);
 
 	//Creating the Enemy Ship
-	 this->m_enemy = new ShipEnemy();
+	this->m_enemy = new ShipEnemy(m_player);
 	this->m_gameObjects.push_back(m_enemy);
 
 
@@ -184,7 +194,6 @@ void Game::HandleEvents()
 			/* We are only worried about SDL_KEYDOWN and SDL_KEYUP events */
 			switch (event.type) {
 			case SDL_KEYDOWN:
-				std::cout<<"Key press detected\n";
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_w:
@@ -205,7 +214,6 @@ void Game::HandleEvents()
 				break;
 
 			case SDL_KEYUP:
-				cout<<"Key release detected\n";
 				switch (event.key.keysym.sym)
 				{
 				case SDLK_c :
@@ -236,7 +244,8 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	//Checking it there is asteroids 
+	//Checking it there is asteroids , if so increment the number of
+	//dificulty
 	if (m_gameObjects.size() - 2 == 0) 
 	{
 		this->m_numberOfAsteroids += 2;
@@ -278,8 +287,7 @@ void Game::Update()
 			if (asteroid) 
 			{
 				if (bullet->IsCollading(asteroid)) 
-				{
-					std::cout << "THE BULLET IS COLLADING" << std::endl;
+				{				
 					this->ScoreLogic(asteroid);
 					Asteroid::AsteroidSize::Size asteroidSize = asteroid->GetSize();
 					//Deleting the asteroid

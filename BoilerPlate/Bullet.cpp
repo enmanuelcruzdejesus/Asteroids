@@ -18,7 +18,7 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
     this->m_updates = 0;
 	this->m_transforms = new TransformationComponent();
 	this->m_transforms->Teleport(pos.GetX(),pos.GetY());
-	this->m_transforms->RotateInRadians(AngleInRadians);
+	this->m_transforms->RotateInRadians(AngleInRadians + DegreesToRadians(ANGLE_OFFSET));
 
 
 	this->m_physics = new RigidBodyComponent(
@@ -36,7 +36,7 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 
 	//Applaying force 
 	Vector2D force = Vector2D(THURST) + velocity;
-    this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians() + DegreesToRadians(ANGLE_OFFSET));
+    this->m_physics->ApplyForce(force, m_transforms->GetAngleIRadians());
 	
 	
 }
@@ -45,7 +45,6 @@ Bullet::Bullet(Vector2D pos, Vector2D velocity, float AngleInRadians)
 #pragma region METHODS
 void Bullet::Update(double deltaTime)
 {	 
-	std::cout << m_updates << endl;
 	if (m_updates == MAX_FRAME_LIFE_TIME)
 		m_isAlive = false;
 
